@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S-TeamCreative.id — Portal Kreatif & Solusi Digital</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Archivo Black (Heavy Display), Silkscreen (Pixel Accent), & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        pixel: ['"Silkscreen"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#060A17',
+                            blue: '#0295E5',
+                            green: '#84D12C',
+                            amber: '#FDB813',
+                            surface: '#050814'
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.18)',
+                        'glass-hover': '0 20px 40px -5px rgba(2, 149, 229, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { visibility: hidden; }
+        /* Ambient Mesh & Liquid Glass Utilities (iOS 27 Dark Glass Theme) */
+        body {
+            background-color: #050814;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(2, 149, 229, 0.16) 0%, transparent 42%),
+                radial-gradient(circle at 85% 25%, rgba(132, 209, 44, 0.12) 0%, transparent 42%),
+                radial-gradient(circle at 50% 85%, rgba(253, 184, 19, 0.09) 0%, transparent 48%);
+            background-attachment: fixed;
+        }
+        .ios-glass {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.025) 100%);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+        }
+        .ios-glass-card {
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+        }
+        .ios-glass-card:hover {
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border-color: rgba(255, 255, 255, 0.28);
+            box-shadow: 0 20px 45px -10px rgba(2, 149, 229, 0.28), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+        }
+        .ios-glass-modal {
+            background: linear-gradient(160deg, rgba(16, 23, 46, 0.82) 0%, rgba(8, 12, 26, 0.90) 100%);
+            backdrop-filter: blur(36px) saturate(200%);
+            -webkit-backdrop-filter: blur(36px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
+        }
+    </style>
+</head>
+<body class="text-slate-100 antialiased selection:bg-brand-blue/30 selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Floating Ambient Orbs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div class="absolute -top-32 -left-20 w-96 h-96 bg-brand-blue/20 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/3 -right-24 w-[28rem] h-[28rem] bg-brand-green/15 rounded-full blur-[130px]"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-brand-amber/10 rounded-full blur-[120px]"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-40 w-full bg-[#060A17]/70 backdrop-blur-2xl border-b border-white/10 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo (SVG Custom sesuai gambar) -->
+                <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="w-10 h-11 flex-shrink-0 transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_0_12px_rgba(2,149,229,0.4)]">
+                        <svg viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <defs>
+                                <linearGradient id="topSGrad" x1="15" y1="45" x2="85" y2="75" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#0295E5"/>
+                                    <stop offset="100%" stop-color="#38BDF8"/>
+                                </linearGradient>
+                                <linearGradient id="botSGrad" x1="20" y1="95" x2="85" y2="65" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#19B596"/>
+                                    <stop offset="50%" stop-color="#68C838"/>
+                                    <stop offset="100%" stop-color="#9BE12B"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Tiga Titik di Atas -->
+                            <circle cx="23" cy="23" r="9.5" fill="#0295E5"/>
+                            <circle cx="50" cy="14" r="9.5" fill="#8CD82B"/>
+                            <circle cx="77" cy="23" r="9.5" fill="#FDB813"/>
+                            <!-- Lengkungan Atas Huruf S -->
+                            <path d="M 73 46 C 63 34, 34 33, 25 46 C 17 58, 30 67, 50 72" 
+                                  stroke="url(#topSGrad)" stroke-width="13.5" stroke-linecap="round"/>
+                            <!-- Lengkungan Bawah Huruf S -->
+                            <path d="M 52 57 C 72 62, 83 72, 74 86 C 64 100, 34 100, 23 86" 
+                                  stroke="url(#botSGrad)" stroke-width="13.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display text-lg sm:text-xl tracking-tight text-white uppercase leading-none">
+                            S-TEAMCREATIVE<span class="text-brand-blue">.ID</span>
+                        </span>
+                        <span class="font-pixel text-[10px] text-slate-400 tracking-wider uppercase mt-1 hidden sm:inline-block">
+                            DIGITAL ECOSYSTEM HUB
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-7 font-display text-xs uppercase tracking-wider text-slate-300">
+                    <button onclick="filterCategory('all')" class="hover:text-white transition-colors">Semua</button>
+                    <button onclick="filterCategory('Application')" class="flex items-center gap-2 hover:text-brand-blue transition-colors">
+                        <span class="w-2 h-2 bg-brand-blue inline-block"></span>Application
+                    </button>
+                    <button onclick="filterCategory('Materi')" class="flex items-center gap-2 hover:text-brand-green transition-colors">
+                        <span class="w-2 h-2 bg-brand-green inline-block"></span>Materi
+                    </button>
+                    <button onclick="filterCategory('Bahan Siap Upload')" class="flex items-center gap-2 hover:text-brand-amber transition-colors">
+                        <span class="w-2 h-2 bg-brand-amber inline-block"></span>Bahan Siap Upload
+                    </button>
+                </nav>
+                <button type="button" onclick="logoutPortal()" class="ml-auto md:ml-5 px-4 py-2 rounded-xl ios-glass text-xs font-display uppercase tracking-wider text-slate-200 hover:text-white hover:border-white/30 transition-colors">
+                    Keluar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden border-b border-white/10 pt-12 pb-14 sm:pt-16 sm:pb-20">
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full ios-glass font-pixel text-[11px] uppercase tracking-wider text-slate-200 mb-6">
+                <span class="flex h-2 w-2 rounded-full bg-brand-green shadow-[0_0_8px_#84D12C]"></span>
+                <span>SATU PORTAL • SEMUA SOLUSI KREATIF</span>
+            </div>
+
+            <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight leading-[1.08] mb-5 drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+                EKSPLORASI FITUR & ASET <br class="hidden sm:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-emerald-400 to-brand-green">S-TEAMCREATIVE.ID</span>
+            </h1>
+
+            <p class="text-slate-300/90 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
+                Temukan berbagai aplikasi produktivitas siap pakai, modul materi pembelajaran terstruktur, hingga ribuan bahan siap upload dalam satu ekosistem modern.
+            </p>
+
+            <!-- Search Bar (iOS 27 Glass Style) -->
+            <div class="max-w-xl mx-auto relative">
+                <div class="relative flex items-center">
+                    <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 pointer-events-none"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        onkeyup="handleSearch()" 
+                        placeholder="Cari aplikasi, e-book materi, template, atau bahan siap upload..." 
+                        class="w-full pl-12 pr-12 py-4 ios-glass rounded-2xl text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/60 focus:border-white/30 transition-all"
+                    >
+                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-4 text-slate-400 hover:text-white p-1">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Portal Directory -->
+    <main id="katalog" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        
+        <!-- Filter Tabs & Counter -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <!-- Category Pills -->
+            <div class="flex items-center gap-2.5 overflow-x-auto pb-2 sm:pb-0 no-scrollbar" id="categoryTabs">
+                <button onclick="filterCategory('all')" data-cat="all" class="tab-btn active px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 bg-white text-slate-950 shadow-[0_0_20px_rgba(255,255,255,0.25)] whitespace-nowrap">
+                    Semua Fitur
+                </button>
+                <button onclick="filterCategory('Application')" data-cat="Application" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
+                    <span class="w-2 h-2 bg-brand-blue shadow-[0_0_8px_#0295E5]"></span>
+                    Application
+                </button>
+                <button onclick="filterCategory('Materi')" data-cat="Materi" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
+                    <span class="w-2 h-2 bg-brand-green shadow-[0_0_8px_#84D12C]"></span>
+                    Materi
+                </button>
+                <button onclick="filterCategory('Bahan Siap Upload')" data-cat="Bahan Siap Upload" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
+                    <span class="w-2 h-2 bg-brand-amber shadow-[0_0_8px_#FDB813]"></span>
+                    Bahan Siap Upload
+                </button>
+            </div>
+
+            <!-- Result Count -->
+            <div class="font-pixel text-xs uppercase tracking-wider text-slate-400">
+                MENAMPILKAN <span id="itemCount" class="text-white font-bold">0</span> PRODUK
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cards will be dynamically injected here -->
+        </div>
+
+        <!-- Empty State (Hidden by default) -->
+        <div id="emptyState" class="hidden text-center py-16 px-4 ios-glass rounded-3xl">
+            <div class="w-16 h-16 bg-white/10 border border-white/15 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-300">
+                <i data-lucide="folder-search" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-display text-lg uppercase text-white mb-2">Fitur Tidak Ditemukan</h3>
+            <p class="text-slate-400 text-sm max-w-md mx-auto mb-6">Maaf, tidak ada produk yang cocok dengan kata kunci atau kategori yang Anda pilih.</p>
+            <button onclick="resetFilters()" class="px-5 py-2.5 rounded-2xl bg-brand-blue text-white font-display text-xs uppercase tracking-wider hover:bg-sky-400 transition-colors">
+                Reset Pencarian
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#040711]/80 backdrop-blur-xl border-t border-white/10 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-7 h-8">
+                        <svg viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <circle cx="23" cy="23" r="9.5" fill="#0295E5"/>
+                            <circle cx="50" cy="14" r="9.5" fill="#8CD82B"/>
+                            <circle cx="77" cy="23" r="9.5" fill="#FDB813"/>
+                            <path d="M 73 46 C 63 34, 34 33, 25 46 C 17 58, 30 67, 50 72" stroke="#0295E5" stroke-width="13.5" stroke-linecap="round"/>
+                            <path d="M 52 57 C 72 62, 83 72, 74 86 C 64 100, 34 100, 23 86" stroke="#84D12C" stroke-width="13.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span class="font-display text-base uppercase text-white">S-TEAMCREATIVE<span class="text-brand-blue">.ID</span></span>
+                </div>
+
+                <p class="text-xs text-slate-400 text-center">
+                    &copy; 2026 S-TeamCreative.id. Seluruh hak cipta dilindungi undang-undang.
+                </p>
+
+                <div class="flex items-center gap-4 text-slate-400 font-pixel text-xs uppercase">
+                    <a href="#katalog" class="hover:text-brand-blue transition-colors">Katalog</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-brand-blue transition-colors">Beranda</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Detail & Akses Fitur (iOS 27 Glass Modal) -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md transition-opacity">
+        <div class="ios-glass-modal rounded-3xl max-w-lg w-full overflow-hidden transform transition-all" id="modalContent">
+            <!-- Modal Header -->
+            <div class="p-6 sm:p-7 border-b border-white/10 flex items-start justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div id="modalIconBox" class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <!-- Icon injected via JS -->
+                    </div>
+                    <div>
+                        <span id="modalBadge" class="inline-block px-2.5 py-0.5 rounded-md font-pixel text-[10px] uppercase tracking-wider mb-1.5">
+                            Kategori
+                        </span>
+                        <h3 id="modalTitle" class="font-display text-lg sm:text-xl uppercase text-white leading-snug">
+                            Judul Fitur
+                        </h3>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 sm:p-7 space-y-5">
+                <p id="modalDesc" class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Deskripsi lengkap produk akan tampil di sini.
+                </p>
+
+                <div class="bg-white/[0.04] rounded-2xl p-4 border border-white/10">
+                    <h4 class="font-pixel text-[11px] uppercase tracking-wider text-slate-400 mb-3">Apa yang Anda dapatkan:</h4>
+                    <ul id="modalFeatures" class="space-y-2.5 text-sm text-slate-200">
+                        <!-- Features list injected via JS -->
+                    </ul>
+                </div>
+
+                <div class="flex items-center justify-between pt-2">
+                    <div>
+                        <span class="font-pixel text-[10px] uppercase text-slate-400 block">Investasi</span>
+                        <span id="modalPrice" class="font-display text-xl text-white">Rp 150.000</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="closeModal()" class="px-4 py-3 rounded-2xl font-display text-xs uppercase text-slate-300 hover:bg-white/10 transition-colors">
+                            Tutup
+                        </button>
+                        <a id="modalActionBtn" href="#" onclick="handlePurchaseAction(event)" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl font-display text-xs uppercase tracking-wider text-white bg-brand-blue hover:bg-sky-400 transition-all shadow-[0_0_20px_rgba(2,149,229,0.4)]">
+                            <span>Akses Sekarang</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="ios-glass-modal text-white px-5 py-3.5 rounded-2xl flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-brand-green/20 text-brand-green border border-brand-green/30 flex items-center justify-center flex-shrink-0">
+                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <p id="toastTitle" class="font-display text-xs uppercase tracking-wide text-white">Mengarahkan ke Halaman Akses</p>
+                <p id="toastSub" class="text-xs text-slate-300 mt-0.5">Silakan sesuaikan tautan produk Anda di kode.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ==========================================
+        // AUTHENTICATION GATE: WAJIB LOGIN UNTUK SELURUH PORTAL
+        // ==========================================
+        const SUPABASE_URL = 'https://ovqhioywonnaglctwvne.supabase.co';
+        const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_koVn1Hk8RwBZDMhwh9_TZA_n3IoIhez';
+        const portalSupabase = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY,
+            { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
+        );
+
+        let currentPortalUser = null;
+        let currentPortalProfile = null;
+
+        async function requireActivePortalSession() {
+            try {
+                const { data: sessionData, error: sessionError } = await portalSupabase.auth.getSession();
+                if (sessionError) throw sessionError;
+                const session = sessionData.session;
+                if (!session) {
+                    window.location.replace('login.html');
+                    return false;
+                }
+
+                // Selalu validasi identitas dari Auth, bukan dari input/localStorage.
+                const { data: userData, error: userError } = await portalSupabase.auth.getUser();
+                if (userError || !userData.user) throw userError || new Error('Sesi pengguna tidak valid.');
+
+                const { data: profile, error: profileError } = await portalSupabase
+                    .from('profiles')
+                    .select('id, username, role, is_active')
+                    .eq('id', userData.user.id)
+                    .maybeSingle();
+                if (profileError) throw profileError;
+                if (!profile || profile.is_active !== true) {
+                    await portalSupabase.auth.signOut();
+                    window.location.replace('login.html?reason=inactive');
+                    return false;
+                }
+
+                currentPortalUser = userData.user;
+                currentPortalProfile = profile;
+                document.body.style.visibility = 'visible';
+                return true;
+            } catch (error) {
+                console.error('Portal authentication check failed:', error);
+                try { await portalSupabase.auth.signOut(); } catch (_) {}
+                window.location.replace('login.html?reason=auth');
+                return false;
+            }
+        }
+
+        async function logoutPortal() {
+            const { error } = await portalSupabase.auth.signOut();
+            if (error) {
+                console.error('Logout failed:', error);
+                alert('Logout gagal. Silakan coba kembali.');
+                return;
+            }
+            window.location.replace('login.html');
+        }
+
+        // Data Katalog Fitur & Produk S-TeamCreative.id
+        const products = [
+            // KATEGORI: APPLICATION
+            {
+                id: 1,
+                title: "S-Teamvoice Pro",
+                subtitle: "by s-teamcreative.id",
+                category: "Application",
+                tag: "AI Voice Generator • TTS",
+                price: "Akses Aplikasi",
+                icon: "mic",
+                previewType: "voice",
+                shortDesc: "S-teamvoice Pro by s-teamcreative.id adalah aplikasi generator suara AI (Text-to-Speech) berbahasa Indonesia untuk menghasilkan sulih suara natural & ekspresif dalam hitungan detik.",
+                fullDesc: "S-teamvoice Pro adalah aplikasi generator suara AI (Text-to-Speech) berbahasa Indonesia yang dirancang untuk menghasilkan sulih suara (voice-over) natural dan ekspresif dalam hitungan detik.",
+                features: [
+                    "Studio Mode: Mengubah teks menjadi audio dengan 14 pilihan karakter suara pria & wanita khas Indonesia, lengkap dengan pengaturan emosi, kecepatan bicara, dan tinggi nada.",
+                    "Dialog Mode (Multi-Speaker): Membuat simulasi percakapan interaktif dua orang secara bersamaan dengan karakter vokal dan ekspresi yang berbeda.",
+                    "Ads Mode (AI Copywriting): Menghasilkan naskah iklan berdurasi 60 detik secara otomatis dari deskripsi produk, lalu langsung mengubahnya menjadi audio siap pakai.",
+                    "Unduh & Riwayat Audio: Menyimpan riwayat produksi suara sementara dan mendukung pengunduhan audio dalam format .wav berkualitas jernih."
+                ],
+                link: "https://share.gemini.google/D5uaOVuwocGP"
+            },
+            {
+                id: 2,
+                title: "S-Team Affiliate Pro Generator",
+                subtitle: "by s-teamcreative.id",
+                category: "Application",
+                tag: "AI Content Studio • V6.1",
+                price: "Akses Aplikasi",
+                icon: "wand-2",
+                previewType: "affiliate",
+                shortDesc: "Tingkatkan performa konten affiliate Anda dengan S-team Affiliate Pro Generator. Aplikasi studio AI all-in-one untuk produksi konten promosi instan.",
+                fullDesc: "Tingkatkan performa konten affiliate Anda dengan S-team Affiliate Pro Generator by S-teamcreative.id. Aplikasi studio AI all-in-one yang dirancang khusus untuk mempercepat produksi konten promosi tanpa perlu sesi pemotretan mahal.",
+                features: [
+                    "4 Mode Visual Spesifik: UGC Natural, Commercial Studio, Mirror Check, dan POV Hand Review.",
+                    "AI Product Analyzer: Deteksi otomatis detail produk dan rekomendasi latar estetik.",
+                    "Storyboard & Prompt Video: Menghasilkan hingga 12 scene berurutan lengkap dengan prompt siap pakai untuk AI Video Generator.",
+                    "Built-in Audio Studio: Buat naskah dan suara Voice Over (TTS) bahasa Indonesia yang natural langsung di dalam aplikasi."
+                ],
+                link: "https://share.gemini.google/XOVnhK8c8yDU"
+            },
+            {
+                id: 3,
+                title: "YouTube Extractor Pro",
+                subtitle: "by s-teamcreative.id",
+                category: "Application",
+                tag: "AI YouTube Research • Pro Edition",
+                price: "Akses Aplikasi",
+                icon: "youtube",
+                customIconType: "youtube",
+                previewType: "youtube",
+                shortDesc: "YouTube Extractor Pro by s-teamcreative.id — Solusi all-in-one berbasis AI untuk riset dan optimasi video YouTube. Ekstrak metadata instan, unduh thumbnail HD, serta ciptakan 10 variasi judul High-CTR 100 karakter.",
+                fullDesc: "YouTube Extractor Pro by s-teamcreative.id adalah alat berbasis AI yang dirancang untuk mempercepat riset dan optimasi konten YouTube. Cukup tempel tautan video untuk mengekstrak metadata, mengunduh thumbnail HD secara langsung, serta menghasilkan variasi judul dan visual High-CTR secara instan.",
+                features: [
+                    "Ekstraksi Metadata Instan: Ambil judul, deskripsi lengkap, dan informasi kanal secara otomatis dengan fitur salin satu klik (one-click copy).",
+                    "Direct Download Thumbnail: Unduh berkas gambar thumbnail asli maupun hasil AI langsung ke penyimpanan perangkat Anda tanpa membuka tab baru.",
+                    "AI High-CTR Title Generator: Ciptakan 10 variasi judul alternatif tepat 100 karakter, dilengkapi opsi Tanpa Emote untuk menyesuaikan gaya brand kanal Anda.",
+                    "AI Thumbnail Studio (16:9): Hasilkan desain thumbnail baru berasio 16:9 dari referensi thumbnail asli atau unggahan manual tanpa mengubah teks/daftar lagu utama.",
+                    "Desain iOS 27 Liquid Glass Dark: Antarmuka modern dan responsif dari s-teamcreative.id yang nyaman digunakan untuk riset harian."
+                ],
+                link: "https://share.gemini.google/Qqs98iiF3Sjx"
+            },
+
+            // KATEGORI: MATERI
+            {
+                id: 4,
+                title: "Masterclass: Bangun Bisnis Digital",
+                category: "Materi",
+                tag: "Video Course • 24 Modul",
+                price: "Rp 299.000",
+                icon: "play-circle",
+                shortDesc: "Panduan langkah demi langkah merancang, memvalidasi, dan memasarkan produk digital dari nol.",
+                fullDesc: "Pelajari strategi membangun ekosistem produk digital yang menghasilkan pendapatan berulang, mulai dari riset pasar hingga teknik funneling modern.",
+                features: [
+                    "24 Video HD terstruktur dengan studi kasus nyata",
+                    "Workbook & checklist perencanaan produk",
+                    "Akses grup diskusi eksklusif S-TeamCreative",
+                    "Sertifikat penyelesaian kelas"
+                ],
+                link: "#akses-masterclass"
+            },
+            {
+                id: 5,
+                title: "E-Book: Copywriting & Funneling",
+                category: "Materi",
+                tag: "E-Book PDF • 180 Hal",
+                price: "Rp 99.000",
+                icon: "book-open",
+                shortDesc: "Kumpulan formula penulisan iklan, landing page, dan skrip promosi yang terbukti meningkatkan klik.",
+                fullDesc: "Tidak perlu bingung merangkai kata jualan. Buku digital ini berisi puluhan kerangka kalimat persuasif yang siap Anda adaptasi untuk berbagai niche.",
+                features: [
+                    "50+ Template headline pemikat perhatian",
+                    "Struktur anatomi landing page konversi tinggi",
+                    "Contoh skrip follow-up chat pelanggan",
+                    "Bonus spreadsheet kalkulator iklan"
+                ],
+                link: "#akses-ebook"
+            },
+            {
+                id: 6,
+                title: "Workshop: Desain UI/UX Minimalis",
+                category: "Materi",
+                tag: "Rekaman + File Kerja",
+                price: "Rp 175.000",
+                icon: "layers",
+                shortDesc: "Belajar prinsip tata letak modern, pemilihan tipografi, dan sistem warna harmonis menggunakan Figma.",
+                fullDesc: "Materi praktis bagi pemula maupun kreator yang ingin meningkatkan estetika tampilan aplikasi dan website agar terlihat profesional dan nyaman dilihat.",
+                features: [
+                    "Rekaman sesi praktik langsung 4 jam penuh",
+                    "File master Figma Design System siap pakai",
+                    "Panduan pemilihan palet warna & hierarki font",
+                    "Akses selamanya tanpa biaya bulanan"
+                ],
+                link: "#akses-uiux"
+            },
+
+            // KATEGORI: BAHAN SIAP UPLOAD
+            {
+                id: 7,
+                title: "1.500+ Template Konten Sosial Media",
+                category: "Bahan Siap Upload",
+                tag: "Canva & PSD",
+                price: "Rp 129.000",
+                icon: "image",
+                shortDesc: "Koleksi lengkap template feed, carousel edukasi, dan story Instagram/TikTok yang siap edit & upload.",
+                fullDesc: "Hemat waktu desain harian Anda. Cukup ganti teks, warna, dan foto produk dalam hitungan menit menggunakan akun Canva gratis maupun Pro.",
+                features: [
+                    "800+ Template Feed & Microblog Carousel",
+                    "500+ Desain Story interaktif & promosi",
+                    "200+ Cover Reels & Thumbnail YouTube",
+                    "Tersedia versi link Canva & file PSD"
+                ],
+                link: "#akses-template-sosmed"
+            },
+            {
+                id: 8,
+                title: "Mega Pack Aset Vektor & Ilustrasi",
+                category: "Bahan Siap Upload",
+                tag: "SVG • AI • PNG",
+                price: "Rp 145.000",
+                icon: "shapes",
+                shortDesc: "Ribuan ikon minimalis, karakter ilustrasi 2D/3D, dan elemen grafis resolusi tinggi siap pakai.",
+                fullDesc: "Lengkapi kebutuhan visual presentasi, website, maupun kemasan produk Anda dengan aset vektor tajam yang dapat diperbesar tanpa pecah.",
+                features: [
+                    "Format lengkap: SVG, AI, EPS, dan PNG Transparan",
+                    "Lisensi komersial untuk proyek klien & pribadi",
+                    "Terorganisir rapi dalam folder berdasarkan tema",
+                    "Update aset baru setiap bulan"
+                ],
+                link: "#akses-vektor"
+            },
+            {
+                id: 9,
+                title: "Kit Presentasi Pitch Deck & Bisnis",
+                category: "Bahan Siap Upload",
+                tag: "PPTX & Google Slides",
+                price: "Rp 115.000",
+                icon: "presentation",
+                shortDesc: "300+ slide presentasi modern dengan infografis data, mockup perangkat, dan animasi halus.",
+                fullDesc: "Tampil lebih meyakinkan di depan klien, investor, atau audiens kelas dengan tata letak slide yang bersih, minimalis, dan mudah disesuaikan.",
+                features: [
+                    "Kompatibel dengan PowerPoint, Keynote & Google Slides",
+                    "Rasio layar lebar 16:9 HD & siap cetak",
+                    "Dilengkapi grafik infografis yang dapat diedit datanya",
+                    "Panduan palet warna sekali klik"
+                ],
+                link: "#akses-pitchdeck"
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentSearch = '';
+        let selectedProduct = null;
+
+        // Konfigurasi gaya berdasarkan kategori (Dark Glass + Accent Glow sesuai logo S-TeamCreative)
+        const categoryStyles = {
+            'Application': {
+                badgeBg: 'bg-brand-blue/15 text-sky-300 border-brand-blue/30',
+                iconBg: 'bg-brand-blue/15 text-sky-400 border border-brand-blue/30',
+                dotColor: 'bg-brand-blue shadow-[0_0_8px_#0295E5]',
+                btnHover: 'group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue'
+            },
+            'Materi': {
+                badgeBg: 'bg-brand-green/15 text-lime-300 border-brand-green/30',
+                iconBg: 'bg-brand-green/15 text-lime-400 border border-brand-green/30',
+                dotColor: 'bg-brand-green shadow-[0_0_8px_#84D12C]',
+                btnHover: 'group-hover:bg-brand-green group-hover:text-slate-950 group-hover:border-brand-green'
+            },
+            'Bahan Siap Upload': {
+                badgeBg: 'bg-brand-amber/15 text-amber-300 border-brand-amber/30',
+                iconBg: 'bg-brand-amber/15 text-amber-400 border border-brand-amber/30',
+                dotColor: 'bg-brand-amber shadow-[0_0_8px_#FDB813]',
+                btnHover: 'group-hover:bg-brand-amber group-hover:text-slate-950 group-hover:border-brand-amber'
+            }
+        };
+
+        // Helper Render Ikon Khusus (misal Logo YouTube SVG)
+        function getProductIconHtml(item, sizeClass = 'w-6 h-6') {
+            if (item.customIconType === 'youtube') {
+                return `
+                    <svg viewBox="0 0 24 24" class="${sizeClass}" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="#FF0000"/>
+                        <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FFFFFF"/>
+                    </svg>
+                `;
+            }
+            return `<i data-lucide="${item.icon}" class="${sizeClass}"></i>`;
+        }
+
+        // Helper Render Mini UI Preview Aplikasi
+        function getAppPreviewHtml(previewType) {
+            if (previewType === 'voice') {
+                return `
+                    <div class="mb-5 rounded-2xl bg-[#050A18]/90 border border-white/15 p-3 shadow-inner overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2.5">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
+                                <span class="font-display text-[10px] text-white tracking-tight">S-TEAMVOICE <span class="text-brand-green">PRO</span></span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="px-1.5 py-0.5 rounded-full bg-brand-blue text-[8px] font-display text-white">STUDIO</span>
+                                <span class="px-1.5 py-0.5 rounded-full bg-white/5 text-[8px] font-pixel text-slate-400">DIALOG</span>
+                                <span class="px-1.5 py-0.5 rounded-full bg-white/5 text-[8px] font-pixel text-slate-400">ADS</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/[0.04] border border-white/10 rounded-xl p-2 mb-2">
+                            <div class="font-pixel text-[8px] text-brand-green mb-1">✦ INPUT TEKS</div>
+                            <div class="text-[10px] text-slate-400 italic">Tulis naskah sulih suara Anda di sini...</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            <div class="rounded-lg bg-brand-blue/20 border border-brand-blue p-1.5">
+                                <div class="text-[9px] font-bold text-sky-300 leading-none">Anita</div>
+                                <div class="text-[7px] text-slate-300 mt-0.5 truncate">Ramah & Ceria</div>
+                            </div>
+                            <div class="rounded-lg bg-white/5 border border-white/10 p-1.5">
+                                <div class="text-[9px] font-bold text-slate-300 leading-none">Siti</div>
+                                <div class="text-[7px] text-slate-400 mt-0.5 truncate">Lembut & Sopan</div>
+                            </div>
+                            <div class="rounded-lg bg-white/5 border border-white/10 p-1.5">
+                                <div class="text-[9px] font-bold text-slate-300 leading-none">Agus</div>
+                                <div class="text-[7px] text-slate-400 mt-0.5 truncate">Deep & Naratif</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (previewType === 'affiliate') {
+                return `
+                    <div class="mb-5 rounded-2xl bg-[#050A18]/90 border border-white/15 p-3 shadow-inner overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-brand-green"></span>
+                                <span class="font-display text-[9px] text-white tracking-tight">S-TEAM AFFILIATE PRO</span>
+                                <span class="px-1.5 py-0.2 rounded bg-brand-blue/20 border border-brand-blue/40 font-pixel text-[7px] text-sky-300">V6.1</span>
+                            </div>
+                            <span class="font-pixel text-[7px] text-slate-400">01 — 03</span>
+                        </div>
+                        <div class="mb-2">
+                            <div class="font-display text-[10px] text-white uppercase tracking-tight">PILIH MODE VISUAL</div>
+                            <div class="text-[8px] text-slate-400">Tentukan gaya estetika kampanye visual affiliate Anda.</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <div class="rounded-xl bg-gradient-to-br from-brand-blue/20 to-white/[0.02] border border-brand-blue/40 p-2">
+                                <div class="flex justify-between items-center mb-1">
+                                    <i data-lucide="smartphone" class="w-3 h-3 text-sky-300"></i>
+                                    <span class="font-pixel text-[7px] text-slate-400">01</span>
+                                </div>
+                                <div class="font-display text-[8px] text-white uppercase leading-tight">UGC NATURAL</div>
+                                <div class="text-[7px] text-slate-400 truncate mt-0.5">Kasual & otentik</div>
+                            </div>
+                            <div class="rounded-xl bg-white/[0.03] border border-white/10 p-2">
+                                <div class="flex justify-between items-center mb-1">
+                                    <i data-lucide="box" class="w-3 h-3 text-slate-300"></i>
+                                    <span class="font-pixel text-[7px] text-slate-400">02</span>
+                                </div>
+                                <div class="font-display text-[8px] text-white uppercase leading-tight">COMMERCIAL</div>
+                                <div class="text-[7px] text-slate-400 truncate mt-0.5">Studio profesional</div>
+                            </div>
+                            <div class="rounded-xl bg-white/[0.03] border border-white/10 p-2">
+                                <div class="flex justify-between items-center mb-1">
+                                    <i data-lucide="camera" class="w-3 h-3 text-slate-300"></i>
+                                    <span class="font-pixel text-[7px] text-slate-400">03</span>
+                                </div>
+                                <div class="font-display text-[8px] text-white uppercase leading-tight">MIRROR CHECK</div>
+                                <div class="text-[7px] text-slate-400 truncate mt-0.5">Estetika OOTD</div>
+                            </div>
+                            <div class="rounded-xl bg-white/[0.03] border border-white/10 p-2">
+                                <div class="flex justify-between items-center mb-1">
+                                    <i data-lucide="hand" class="w-3 h-3 text-slate-300"></i>
+                                    <span class="font-pixel text-[7px] text-slate-400">04</span>
+                                </div>
+                                <div class="font-display text-[8px] text-white uppercase leading-tight">POV REVIEW</div>
+                                <div class="text-[7px] text-slate-400 truncate mt-0.5">First-person view</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (previewType === 'youtube') {
+                return `
+                    <div class="mb-5 rounded-2xl bg-[#050A18]/90 border border-white/15 p-3 shadow-inner overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                            <div class="flex items-center gap-1.5">
+                                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 flex-shrink-0" fill="none">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="#FF0000"/>
+                                    <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FFFFFF"/>
+                                </svg>
+                                <span class="font-display text-[9px] text-white tracking-tight">YOUTUBE EXTRACTOR <span class="text-brand-green">PRO</span></span>
+                            </div>
+                            <span class="px-1.5 py-0.5 rounded bg-brand-green/15 border border-brand-green/30 font-pixel text-[7px] text-brand-green">AI POWERED</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-white/[0.04] border border-white/10 rounded-lg p-1.5 mb-2">
+                            <div class="text-[8px] text-slate-400 truncate flex-grow">https://youtu.be/pmefDyGqsf8...</div>
+                            <span class="px-1.5 py-0.5 rounded bg-brand-blue font-display text-[7px] text-white whitespace-nowrap">EKSTRAK INFO</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-1.5">
+                            <div class="rounded-lg bg-white/[0.03] border border-white/10 p-1.5 flex flex-col justify-between">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="font-pixel text-[7px] text-slate-400">THUMBNAIL</span>
+                                    <span class="font-pixel text-[6px] text-sky-300 bg-brand-blue/20 px-1 rounded">HD</span>
+                                </div>
+                                <div class="h-7 rounded bg-gradient-to-tr from-sky-900/50 via-slate-800 to-emerald-900/40 border border-white/10 flex items-center justify-center">
+                                    <i data-lucide="image" class="w-3.5 h-3.5 text-slate-300"></i>
+                                </div>
+                                <div class="mt-1 text-center py-0.5 rounded bg-white/10 font-display text-[7px] text-white">DOWNLOAD</div>
+                            </div>
+                            <div class="rounded-lg bg-white/[0.03] border border-white/10 p-1.5 flex flex-col justify-between">
+                                <div class="font-pixel text-[7px] text-brand-amber mb-0.5">✦ 10 IDE HIGH-CTR</div>
+                                <div class="text-[7px] text-slate-300 leading-tight line-clamp-2">Otomatis 100 karakter + opsi Tanpa Emote</div>
+                                <div class="mt-1 text-center py-0.5 rounded bg-brand-blue font-display text-[7px] text-white">GENERATE</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return '';
+        }
+
+        // Render Kartu Produk
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyState');
+            const countEl = document.getElementById('itemCount');
+
+            const filtered = products.filter(item => {
+                const matchCat = currentCategory === 'all' || item.category === currentCategory;
+                const query = currentSearch.toLowerCase().trim();
+                const matchSearch = !query || 
+                    item.title.toLowerCase().includes(query) || 
+                    item.shortDesc.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query) ||
+                    item.tag.toLowerCase().includes(query);
+                return matchCat && matchSearch;
+            });
+
+            countEl.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                if (window.lucide) lucide.createIcons();
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(item => {
+                const style = categoryStyles[item.category];
+                const iconBoxStyle = item.customIconType === 'youtube' 
+                    ? 'bg-red-500/15 border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]' 
+                    : style.iconBg;
+
+                // Tampilan Khusus Kartu Coming Soon
+                if (item.comingSoon) {
+                    return `
+                    <article class="ios-glass-card rounded-3xl p-6 flex flex-col justify-between opacity-75 border-dashed border-white/20">
+                        <div>
+                            <div class="flex items-start justify-between gap-3 mb-5">
+                                <div class="w-12 h-12 rounded-2xl bg-white/5 text-slate-400 border border-white/10 flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-6 h-6"></i>
+                                </div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-pixel text-[10px] uppercase tracking-wider border ${style.badgeBg}">
+                                    <span class="w-1.5 h-1.5 rounded-full ${style.dotColor}"></span>
+                                    ${item.category}
+                                </span>
+                            </div>
+                            <div class="font-pixel text-[11px] text-slate-500 uppercase mb-1.5">SEGERA HADIR</div>
+                            <h3 class="font-display text-2xl uppercase text-slate-300 tracking-wide mb-2.5">
+                                COMING SOON
+                            </h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                ${item.shortDesc}
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="font-pixel text-[11px] uppercase text-slate-500">DALAM PENGEMBANGAN</span>
+                            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-pixel text-[10px] uppercase tracking-wider text-slate-400 bg-white/5 border border-white/10">
+                                <i data-lucide="lock" class="w-3 h-3"></i>
+                                <span>Terkunci</span>
+                            </span>
+                        </div>
+                    </article>
+                    `;
+                }
+
+                const appPreviewHtml = getAppPreviewHtml(item.previewType);
+
+                // Tampilan Tautan Langsung jika memiliki URL eksternal
+                const isExternalLink = item.link && item.link.startsWith('http');
+                const actionHtml = isExternalLink ? `
+                    <div class="flex items-center gap-2">
+                        <button onclick="event.stopPropagation(); openProductModal(${item.id})" class="px-3 py-2 rounded-xl font-display text-[11px] uppercase tracking-wider text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all">
+                            Detail
+                        </button>
+                        <a href="${item.link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-display text-[11px] uppercase tracking-wider text-white bg-brand-blue hover:bg-sky-400 shadow-[0_0_15px_rgba(2,149,229,0.4)] transition-all">
+                            <span>Buka App</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
+                ` : `
+                    <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-display text-[11px] uppercase tracking-wider text-slate-200 bg-white/10 border border-white/15 transition-all duration-200 ${style.btnHover}">
+                        <span>Akses</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </span>
+                `;
+
+                return `
+                <article onclick="openProductModal(${item.id})" class="group cursor-pointer ios-glass-card rounded-3xl p-6 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Top Row: Icon & Category Badge -->
+                        <div class="flex items-start justify-between gap-3 mb-5">
+                            <div class="w-12 h-12 rounded-2xl ${iconBoxStyle} flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                                ${getProductIconHtml(item, 'w-6 h-6')}
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-pixel text-[10px] uppercase tracking-wider border ${style.badgeBg}">
+                                <span class="w-1.5 h-1.5 rounded-full ${style.dotColor}"></span>
+                                ${item.category}
+                            </span>
+                        </div>
+
+                        <!-- Sub-tag -->
+                        <div class="font-pixel text-[11px] text-slate-400 uppercase mb-1.5">${item.tag}</div>
+
+                        <!-- Title -->
+                        <h3 class="font-display text-lg uppercase text-white group-hover:text-sky-300 transition-colors leading-snug ${item.subtitle ? 'mb-0.5' : 'mb-2.5'}">
+                            ${item.title}
+                        </h3>
+                        ${item.subtitle ? `<div class="font-pixel text-[10px] text-brand-green mb-3">${item.subtitle}</div>` : ''}
+
+                        <!-- App UI Preview (Jika ada) -->
+                        ${appPreviewHtml}
+
+                        <!-- Short Description -->
+                        <p class="text-slate-300/80 text-sm leading-relaxed mb-6 ${appPreviewHtml ? '' : 'line-clamp-3'}">
+                            ${item.shortDesc}
+                        </p>
+                    </div>
+
+                    <!-- Bottom Row: Price & Action -->
+                    <div class="pt-4 border-t border-white/10 flex items-center justify-between gap-2">
+                        <div>
+                            <span class="font-pixel text-[10px] uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
+                            <span class="font-display text-sm sm:text-base text-white">${item.price}</span>
+                        </div>
+                        ${actionHtml}
+                    </div>
+                </article>
+                `;
+            }).join('');
+
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // Filter Kategori
+        function filterCategory(category) {
+            currentCategory = category;
+
+            // Update status tombol tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.className = 'tab-btn active px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 bg-white text-slate-950 shadow-[0_0_20px_rgba(255,255,255,0.25)] whitespace-nowrap flex items-center gap-2';
+                } else {
+                    btn.className = 'tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2';
+                }
+            });
+
+            // Gulir halus ke katalog jika diklik dari navbar atas
+            const katalogSection = document.getElementById('katalog');
+            if (window.scrollY > katalogSection.offsetTop + 100) {
+                katalogSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            renderProducts();
+        }
+
+        // Pencarian Langsung
+        function handleSearch() {
+            const input = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearchBtn');
+            currentSearch = input.value;
+
+            if (currentSearch.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            renderProducts();
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            currentSearch = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            input.focus();
+            renderProducts();
+        }
+
+        function resetFilters() {
+            clearSearch();
+            filterCategory('all');
+        }
+
+        // Modal Detail Produk
+        function openProductModal(id) {
+            const item = products.find(p => p.id === id);
+            if (!item || item.comingSoon) return;
+            selectedProduct = item;
+
+            const style = categoryStyles[item.category];
+            const modal = document.getElementById('detailModal');
+            
+            const iconBox = document.getElementById('modalIconBox');
+            const iconBoxStyle = item.customIconType === 'youtube' 
+                ? 'bg-red-500/15 border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]' 
+                : style.iconBg;
+            iconBox.className = `w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${iconBoxStyle}`;
+            iconBox.innerHTML = getProductIconHtml(item, 'w-6 h-6');
+
+            const badge = document.getElementById('modalBadge');
+            badge.className = `inline-block px-2.5 py-0.5 rounded-md font-pixel text-[10px] uppercase tracking-wider border mb-1.5 ${style.badgeBg}`;
+            badge.textContent = `${item.category} • ${item.tag}`;
+
+            document.getElementById('modalTitle').textContent = item.subtitle ? `${item.title} (${item.subtitle})` : item.title;
+            document.getElementById('modalDesc').textContent = item.fullDesc;
+            document.getElementById('modalPrice').textContent = item.price;
+
+            const actionBtn = document.getElementById('modalActionBtn');
+            if (item.link && item.link.startsWith('http')) {
+                actionBtn.href = item.link;
+                actionBtn.target = '_blank';
+                actionBtn.rel = 'noopener noreferrer';
+                actionBtn.onclick = null;
+                actionBtn.innerHTML = `<span>Buka Aplikasi</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
+            } else {
+                actionBtn.href = '#';
+                actionBtn.removeAttribute('target');
+                actionBtn.onclick = handlePurchaseAction;
+                actionBtn.innerHTML = `<span>Akses Sekarang</span><i data-lucide="arrow-up-right" class="w-4 h-4"></i>`;
+            }
+
+            const featuresList = document.getElementById('modalFeatures');
+            featuresList.innerHTML = item.features.map(feat => `
+                <li class="flex items-start gap-2.5">
+                    <i data-lucide="check" class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5"></i>
+                    <span>${feat}</span>
+                </li>
+            `).join('');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Menutup modal jika klik area luar
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Menutup modal dengan tombol Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Simulasi Aksi Tombol Beli/Akses
+        function handlePurchaseAction(e) {
+            e.preventDefault();
+            closeModal();
+            showToast(
+                `Membuka: ${selectedProduct ? selectedProduct.title : 'Produk'}`,
+                'Tautan siap dihubungkan ke halaman checkout / login Anda.'
+            );
+        }
+
+        function showToast(title, sub) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastSub').textContent = sub;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // Inisialisasi hanya setelah session dan profil aktif tervalidasi
+        window.addEventListener('DOMContentLoaded', async () => {
+            const allowed = await requireActivePortalSession();
+            if (!allowed) return;
+            renderProducts();
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
