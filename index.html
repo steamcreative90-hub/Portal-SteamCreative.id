@@ -256,12 +256,12 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        #copyrightNotice.is-closing {
-            animation: copyrightFadeOut .32s ease-in both;
+        #copyrightNotice:not(.hidden).is-closing {
+            animation: copyrightFadeOut .32s ease-in both !important;
             pointer-events: none;
         }
-        #copyrightNotice.is-closing > .ios-glass-modal {
-            animation: copyrightModalExit .32s ease-in both;
+        #copyrightNotice:not(.hidden).is-closing > .ios-glass-modal {
+            animation: copyrightModalExit .32s ease-in both !important;
         }
         html.portal-entering header,
         html.portal-entering main,
