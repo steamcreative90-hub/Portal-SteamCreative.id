@@ -42,7 +42,9 @@
     <style>
         /* Sembunyikan portal sampai sesi Supabase tervalidasi */
         html.auth-pending body { visibility: hidden !important; }
-        html.auth-denied body { display: none !important; }\n        html.copyright-pending body > :not(#copyrightNotice) { visibility: hidden !important; }\n        html.copyright-pending #copyrightNotice { visibility: visible !important; }
+        html.auth-denied body { display: none !important; }
+        html.copyright-pending body > :not(#copyrightNotice) { visibility: hidden !important; }
+        html.copyright-pending #copyrightNotice { visibility: visible !important; }
         /* Perataan teks global: konten paragraf dan daftar rata kiri-kanan */
         p, li, #modalFeatures span {
             text-align: justify;
@@ -1201,6 +1203,7 @@
                     if (!agree.checked) return;
                     notice.classList.add('hidden');
                     notice.classList.remove('flex');
+                    document.documentElement.classList.remove('copyright-pending');
                     renderProducts();
                 });
             } catch (error) {
