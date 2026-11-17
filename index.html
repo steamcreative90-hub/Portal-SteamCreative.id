@@ -1123,8 +1123,8 @@
                 return matchCat && matchSearch;
             }).sort((a, b) => {
                 // Kartu dengan tautan aktif selalu tampil lebih dahulu dalam kategorinya.
-                const aHasLink = !a.comingSoon && typeof a.link === 'string' && /^https?:\\/\\//i.test(a.link);
-                const bHasLink = !b.comingSoon && typeof b.link === 'string' && /^https?:\\/\\//i.test(b.link);
+                const aHasLink = !a.comingSoon && typeof a.link === 'string' && a.link.startsWith('http');
+                const bHasLink = !b.comingSoon && typeof b.link === 'string' && b.link.startsWith('http');
                 return Number(bHasLink) - Number(aHasLink);
             });
 
