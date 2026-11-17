@@ -182,6 +182,29 @@
 </head>
 <body class="text-slate-100 antialiased selection:bg-brand-blue/30 selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
 
+    <!-- Pemberitahuan Hak Cipta: wajib disetujui setelah login -->
+    <div id="copyrightNotice" class="fixed inset-0 z-[100] hidden items-center justify-center bg-[#020617]/90 backdrop-blur-xl p-4" role="dialog" aria-modal="true" aria-labelledby="copyrightNoticeTitle">
+        <div class="ios-glass-modal w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl p-6 sm:p-8">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-amber-400/30 bg-amber-400/10 text-amber-300"><i data-lucide="shield-alert" class="h-6 w-6"></i></div>
+                <div><div class="font-pixel text-[10px] tracking-[.2em] text-brand-amber">PENTING • PERLINDUNGAN KARYA</div><h2 id="copyrightNoticeTitle" class="mt-1 font-display text-xl sm:text-2xl text-white">PEMBERITAHUAN HAK CIPTA</h2></div>
+            </div>
+            <p class="mb-4 text-sm leading-relaxed text-slate-200">Selamat datang di <strong>S-TeamCreative.id</strong>. Seluruh aplikasi, materi, modul, template, file digital, dan bahan siap upload yang tersedia di portal ini diberikan untuk digunakan sesuai tujuan dan izin akses yang diberikan.</p>
+            <div class="mb-5 space-y-3 rounded-2xl border border-red-400/20 bg-red-500/5 p-4 text-sm leading-relaxed text-slate-200">
+                <p class="font-semibold text-red-300">DILARANG TANPA IZIN TERTULIS DARI PEMEGANG HAK:</p>
+                <ul class="list-disc space-y-2 pl-5"><li>Memperjualbelikan atau menjual ulang aplikasi, materi, dan bahan siap upload, baik secara utuh maupun sebagian.</li><li>Menyewakan, membagikan akun atau tautan akses, maupun mendistribusikan ulang kepada pihak lain.</li><li>Menggandakan, mengunggah ulang, membajak, mengubah untuk dijual kembali, atau mengklaim karya sebagai milik sendiri.</li></ul>
+            </div>
+            <div class="mb-5 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-relaxed text-slate-300">
+                <p class="mb-2 font-semibold text-white">Dasar hukum: Undang-Undang Republik Indonesia Nomor 28 Tahun 2014 tentang Hak Cipta.</p>
+                <p>Pasal 8 dan Pasal 9 mengatur hak ekonomi eksklusif Pencipta atau Pemegang Hak Cipta, termasuk penerbitan, penggandaan, dan pendistribusian. Berdasarkan Pasal 9 ayat (2), pelaksanaan hak ekonomi wajib memperoleh izin Pencipta atau Pemegang Hak Cipta; Pasal 9 ayat (3) melarang penggandaan dan/atau penggunaan secara komersial tanpa izin.</p>
+                <a href="https://peraturan.bpk.go.id/Details/38690/uu-no-28-tahun-2014" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-2 text-brand-blue hover:text-sky-300 underline">Baca UU No. 28 Tahun 2014 di JDIH BPK <i data-lucide="external-link" class="h-3.5 w-3.5"></i></a>
+            </div>
+            <p class="mb-5 text-xs leading-relaxed text-slate-400">Pemberitahuan ini merupakan ketentuan penggunaan portal. Penggunaan yang diizinkan tetap mengikuti lisensi atau izin tertulis yang secara khusus diberikan oleh pemegang hak. Pelanggaran dapat ditindaklanjuti sesuai ketentuan hukum yang berlaku.</p>
+            <label class="mb-5 flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200"><input id="copyrightAgree" type="checkbox" class="mt-1 h-4 w-4 shrink-0 accent-sky-500"><span>Saya telah membaca, memahami, dan menyetujui ketentuan penggunaan serta pemberitahuan hak cipta di atas.</span></label>
+            <button id="copyrightContinue" type="button" disabled class="w-full rounded-xl bg-brand-blue px-5 py-3.5 font-display text-xs uppercase tracking-wider text-white opacity-40 transition-all disabled:cursor-not-allowed enabled:opacity-100 enabled:hover:bg-sky-400">Saya Setuju & Masuk Portal <i data-lucide="arrow-right" class="ml-2 inline h-4 w-4"></i></button>
+        </div>
+    </div>
+
     <!-- Floating Ambient Orbs -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div class="absolute -top-32 -left-20 w-96 h-96 bg-brand-blue/20 rounded-full blur-[120px]"></div>
@@ -330,7 +353,7 @@
         </div>
 
         <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
             <!-- Cards will be dynamically injected here -->
         </div>
 
@@ -905,7 +928,7 @@
                 // Tampilan Khusus Kartu Coming Soon
                 if (item.comingSoon) {
                     return `
-                    <article class="ios-glass-card rounded-3xl p-6 flex flex-col justify-between opacity-75 border-dashed border-white/20">
+                    <article class="ios-glass-card h-full min-h-[500px] rounded-3xl p-6 flex flex-col justify-between opacity-75 border-dashed border-white/20">
                         <div>
                             <div class="flex items-start justify-between gap-3 mb-5">
                                 <div class="w-12 h-12 rounded-2xl bg-white/5 text-slate-400 border border-white/10 flex items-center justify-center">
@@ -957,7 +980,7 @@
                 `;
 
                 return `
-                <article onclick="openProductModal(${item.id})" class="group cursor-pointer ios-glass-card rounded-3xl p-6 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+                <article onclick="openProductModal(${item.id})" class="group cursor-pointer ios-glass-card h-full min-h-[500px] rounded-3xl p-6 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
                     <div>
                         <!-- Top Row: Icon & Category Badge -->
                         <div class="flex items-start justify-between gap-3 mb-5">
@@ -1168,7 +1191,18 @@
                 if (usernameEl) usernameEl.textContent = activeProfile.username || 'Pengguna';
                 if (roleEl) roleEl.textContent = activeProfile.role || 'Akun aktif';
                 if (window.lucide) lucide.createIcons();
-                renderProducts();
+                const notice = document.getElementById('copyrightNotice');
+                const agree = document.getElementById('copyrightAgree');
+                const continueBtn = document.getElementById('copyrightContinue');
+                notice.classList.remove('hidden');
+                notice.classList.add('flex');
+                agree.addEventListener('change', () => { continueBtn.disabled = !agree.checked; });
+                continueBtn.addEventListener('click', () => {
+                    if (!agree.checked) return;
+                    notice.classList.add('hidden');
+                    notice.classList.remove('flex');
+                    renderProducts();
+                });
             } catch (error) {
                 console.error('Portal initialization blocked:', error);
                 window.location.replace('login.html?reason=auth');
