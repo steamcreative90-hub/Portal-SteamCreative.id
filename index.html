@@ -1121,6 +1121,11 @@
                     item.category.toLowerCase().includes(query) ||
                     item.tag.toLowerCase().includes(query);
                 return matchCat && matchSearch;
+            }).sort((a, b) => {
+                // Kartu dengan tautan aktif selalu tampil lebih dahulu dalam kategorinya.
+                const aHasLink = !a.comingSoon && typeof a.link === 'string' && /^https?:\\/\\//i.test(a.link);
+                const bHasLink = !b.comingSoon && typeof b.link === 'string' && /^https?:\\/\\//i.test(b.link);
+                return Number(bHasLink) - Number(aHasLink);
             });
 
             countEl.textContent = filtered.length;
@@ -1185,7 +1190,7 @@
                             Detail
                         </button>
                         <a href="${item.link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-display text-[11px] uppercase tracking-wider text-white bg-brand-blue hover:bg-sky-400 shadow-[0_0_15px_rgba(2,149,229,0.4)] transition-all">
-                            <span>${item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka App'}</span>
+                            <span>${item.category === 'Materi' ? 'Akses Materi' : item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka App'}</span>
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                         </a>
                     </div>
