@@ -243,6 +243,31 @@
         #copyrightNotice:not(.hidden) {
             animation: copyrightFadeIn .35s ease-out both;
         }
+        /* Transisi saat pengguna menyetujui pemberitahuan dan masuk ke portal */
+        @keyframes copyrightFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        @keyframes copyrightModalExit {
+            from { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+            to { opacity: 0; transform: translateY(12px) scale(.98); filter: blur(3px); }
+        }
+        @keyframes portalContentReveal {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #copyrightNotice.is-closing {
+            animation: copyrightFadeOut .32s ease-in both;
+            pointer-events: none;
+        }
+        #copyrightNotice.is-closing > .ios-glass-modal {
+            animation: copyrightModalExit .32s ease-in both;
+        }
+        html.portal-entering header,
+        html.portal-entering main,
+        html.portal-entering footer {
+            animation: portalContentReveal .65s cubic-bezier(.2,.8,.2,1) both;
+        }
         #copyrightNotice:not(.hidden) > .ios-glass-modal {
             animation: copyrightModalEnter .5s cubic-bezier(.2,.8,.2,1) both;
         }
@@ -252,7 +277,12 @@
         @media (prefers-reduced-motion: reduce) {
             #copyrightNotice:not(.hidden),
             #copyrightNotice:not(.hidden) > .ios-glass-modal,
-            #copyrightNotice:not(.hidden) [data-lucide="shield-alert"] {
+            #copyrightNotice:not(.hidden) [data-lucide="shield-alert"],
+            #copyrightNotice.is-closing,
+            #copyrightNotice.is-closing > .ios-glass-modal,
+            html.portal-entering header,
+            html.portal-entering main,
+            html.portal-entering footer {
                 animation: none !important;
             }
         }
@@ -1236,8 +1266,8 @@
                     <!-- Bottom Row: Price & Action -->
                     <div class="pt-4 border-t border-white/10 flex flex-nowrap items-center justify-between gap-2">
                         <div class="min-w-0 shrink">
-                            <span class="font-pixel text-[9px] uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
-                            <span class="font-display text-xs sm:text-sm text-white whitespace-nowrap">${item.price}</span>
+                            <span style="font-size:8px !important; line-height:1.2 !important;" class="font-pixel uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
+                            <span style="font-size:10px !important; line-height:1.25 !important;" class="font-display text-white whitespace-nowrap">${item.price}</span>
                         </div>
                         ${actionHtml}
                     </div>
@@ -1440,10 +1470,18 @@
                 agree.addEventListener('change', () => { continueBtn.disabled = !agree.checked; });
                 continueBtn.addEventListener('click', () => {
                     if (!agree.checked) return;
-                    notice.classList.add('hidden');
-                    notice.classList.remove('flex');
-                    document.documentElement.classList.remove('copyright-pending');
-                    renderProducts();
+                    continueBtn.disabled = true;
+                    notice.classList.add('is-closing');
+                    window.setTimeout(() => {
+                        notice.classList.add('hidden');
+                        notice.classList.remove('flex', 'is-closing');
+                        document.documentElement.classList.remove('copyright-pending');
+                        document.documentElement.classList.add('portal-entering');
+                        renderProducts();
+                        window.setTimeout(() => {
+                            document.documentElement.classList.remove('portal-entering');
+                        }, 800);
+                    }, 320);
                 });
             } catch (error) {
                 console.error('Portal initialization blocked:', error);
