@@ -1266,8 +1266,8 @@
                     <!-- Bottom Row: Price & Action -->
                     <div class="pt-4 border-t border-white/10 flex flex-nowrap items-center justify-between gap-2">
                         <div class="min-w-0 shrink">
-                            <span style="font-size:8px !important; line-height:1.2 !important;" class="font-pixel uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
-                            <span style="font-size:10px !important; line-height:1.25 !important;" class="font-display text-white whitespace-nowrap">${item.price}</span>
+                            <span style="font-size:9px !important; line-height:1.2 !important;" class="font-pixel uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
+                            <span style="font-size:14px !important; line-height:1.25 !important;" class="font-display text-white whitespace-nowrap">${isExternalLink ? (item.category === 'Application' ? 'APLIKASI' : item.category === 'Materi' ? 'MATERI' : 'KOLEKSI') : item.price}</span>
                         </div>
                         ${actionHtml}
                     </div>
