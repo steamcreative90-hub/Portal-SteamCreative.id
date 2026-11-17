@@ -238,10 +238,22 @@
                         <span class="w-2 h-2 bg-brand-amber inline-block"></span>Bahan Siap Upload
                     </button>
                 </nav>
-                <button type="button" onclick="logoutPortal()" aria-label="Keluar dari portal"
-                    class="ml-3 shrink-0 px-4 py-2.5 rounded-xl border border-red-300/30 bg-red-500/15 text-xs font-bold text-white hover:bg-red-500/25 transition-colors">
-                    <span aria-hidden="true">↪ </span>LOGOUT
-                </button>
+                <!-- Status pengguna yang sedang login + tombol keluar ringkas -->
+                <div class="ml-3 flex items-center gap-2 sm:gap-3 shrink-0">
+                    <div class="flex items-center gap-2 min-w-0 rounded-xl border border-white/10 bg-white/5 px-2.5 py-2">
+                        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue/20 text-brand-blue">
+                            <i data-lucide="user-round" class="h-4 w-4"></i>
+                        </span>
+                        <div class="min-w-0 leading-tight">
+                            <div id="portalUsername" class="max-w-[112px] truncate text-xs font-semibold text-white sm:max-w-[150px]">Memuat...</div>
+                            <div id="portalUserRole" class="text-[9px] text-slate-400 capitalize"></div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="logoutPortal()" aria-label="Keluar dari portal" title="Keluar"
+                        class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-slate-200 transition-colors hover:border-red-300/30 hover:bg-red-500/15 hover:text-white">
+                        <i data-lucide="log-out" class="h-4 w-4"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -1056,6 +1068,12 @@
                     document.documentElement.classList.contains('auth-denied')) {
                     return;
                 }
+                const activeProfile = window.portalProfile || {};
+                const usernameEl = document.getElementById('portalUsername');
+                const roleEl = document.getElementById('portalUserRole');
+                if (usernameEl) usernameEl.textContent = activeProfile.username || 'Pengguna';
+                if (roleEl) roleEl.textContent = activeProfile.role || 'Akun aktif';
+                if (window.lucide) lucide.createIcons();
                 renderProducts();
             } catch (error) {
                 console.error('Portal initialization blocked:', error);
@@ -1064,10 +1082,5 @@
         });
     </script>
 
-    <!-- Tombol logout tetap terlihat pada layar kecil -->
-    <button type="button" onclick="logoutPortal()" aria-label="Keluar dari portal"
-        class="fixed bottom-5 right-5 z-[100] md:hidden rounded-full border border-red-300/40 bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-xl">
-        ↪ Keluar
-    </button>
 </body>
 </html>
