@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview Portal S-TeamCreative</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['"Archivo Black"','sans-serif']},colors:{brand:{navy:'#060A17',blue:'#0295E5',green:'#84D12C',amber:'#FDB813'}}}}}
+</script>
+<style>
+body{background:#050814;background-image:radial-gradient(circle at 15% 15%,rgba(2,149,229,.16),transparent 42%),radial-gradient(circle at 85% 25%,rgba(132,209,44,.12),transparent 42%);background-attachment:fixed}
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.13);box-shadow:0 8px 32px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18)}
+</style>
+</head>
+<body class="min-h-screen text-slate-100 antialiased font-sans">
+<div class="border-b border-amber-300/20 bg-amber-400/10 px-4 py-2 text-center text-xs text-amber-100">MODE PREVIEW — contoh tampilan saja, bukan portal aktif dan tidak melakukan login/logout sungguhan.</div>
+<header class="sticky top-0 z-10 w-full border-b border-white/10 bg-[#060A17]/80 backdrop-blur-2xl">
+<div class="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">
+<a class="flex items-center gap-3" href="#">
+<div class="flex h-11 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500/20 to-lime-400/20 text-xl font-bold text-sky-300">S</div>
+<div class="flex flex-col"><span class="font-display text-base tracking-tight text-white sm:text-xl">S-TEAMCREATIVE<span class="text-sky-400">.ID</span></span><span class="text-[9px] tracking-[.18em] text-slate-400">DIGITAL ECOSYSTEM HUB</span></div>
+</a>
+<nav class="hidden items-center gap-6 font-display text-[10px] uppercase tracking-wider text-slate-300 md:flex"><span>Semua</span><span>Application</span><span>Materi</span><span>Bahan Siap Upload</span></nav>
+<div class="ml-2 flex shrink-0 items-center gap-2 sm:gap-3">
+<div class="flex min-w-0 items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-2.5 py-2">
+<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500/20 text-sky-300"><i data-lucide="user-round" class="h-4 w-4"></i></span>
+<div class="min-w-0 leading-tight"><div class="text-[9px] uppercase tracking-wider text-slate-400">Sedang login</div><div class="max-w-[112px] truncate text-xs font-semibold text-white sm:max-w-[150px]">admingusti</div><div class="text-[9px] capitalize text-slate-400">customer</div></div>
+</div>
+<button title="Keluar" aria-label="Keluar dari portal" class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-slate-200 transition hover:border-red-300/30 hover:bg-red-500/15 hover:text-white"><i data-lucide="log-out" class="h-4 w-4"></i></button>
+</div>
+</div>
+</header>
+<main class="mx-auto max-w-5xl px-4 py-16 text-center sm:py-24">
+<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[10px] tracking-widest text-slate-200">● SATU PORTAL • SEMUA SOLUSI KREATIF</div>
+<h1 class="mb-5 font-display text-3xl uppercase leading-tight tracking-tight text-white sm:text-5xl">EKSPLORASI FITUR & ASET<br><span class="bg-gradient-to-r from-sky-400 via-emerald-400 to-lime-400 bg-clip-text text-transparent">S-TEAMCREATIVE.ID</span></h1>
+<p class="mx-auto max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">Tampilan portal dengan panel pengguna yang sedang login dan tombol keluar yang lebih ringkas.</p>
+<div class="glass mx-auto mt-12 max-w-xl rounded-2xl p-5 text-left"><div class="mb-2 text-xs uppercase tracking-widest text-slate-400">Perubahan yang sedang diperiksa</div><div class="flex items-center gap-3"><div class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-500/20 text-sky-300"><i data-lucide="user-round"></i></div><div><div class="font-semibold text-white">admingusti</div><div class="text-xs text-slate-400">customer · Sedang login</div></div><span class="ml-auto rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[10px] text-emerald-300">Aktif</span></div><p class="mt-4 text-xs text-slate-400">Tombol keluar sekarang berupa ikon kecil di samping informasi akun, bukan tombol besar atau tombol mengambang.</p></div>
+</main>
+<script>lucide.createIcons();</script>
+</body></html>
