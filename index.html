@@ -50,6 +50,31 @@
             text-align: justify;
             text-justify: inter-word;
         }
+        /* Samakan dimensi seluruh kartu aplikasi pada semua kategori */
+        #productGrid article {
+            height: 460px;
+            min-height: 460px;
+            box-sizing: border-box;
+        }
+        #productGrid article > div:first-child {
+            min-height: 0;
+            overflow: hidden;
+        }
+        #productGrid .app-preview-frame {
+            height: 130px !important;
+        }
+        #productGrid article h3 {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+        }
+        @media (max-width: 640px) {
+            #productGrid article {
+                height: 440px;
+                min-height: 440px;
+            }
+        }
         /* Scroll horizontal khusus tab Semua Fitur */
         #productGrid.all-features-row { display:flex; flex-direction:column; gap:2rem; }
         .category-feature-section { min-width:0; }
