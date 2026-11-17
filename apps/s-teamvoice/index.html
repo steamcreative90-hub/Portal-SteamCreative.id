@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S-TeamVoice Pro — S-TeamCreative.id</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#050814;color:#f8fafc;font-family:Inter,sans-serif;background-image:radial-gradient(circle at 15% 15%,#0295e526,transparent 42%),radial-gradient(circle at 85% 25%,#84d12c1f,transparent 42%),radial-gradient(circle at 50% 85%,#fdb81317,transparent 48%);background-attachment:fixed}
+.display{font-family:'Archivo Black',sans-serif;text-transform:uppercase}.glass{background:linear-gradient(145deg,#ffffff14,#ffffff06);backdrop-filter:blur(24px);border:1px solid #ffffff20;box-shadow:0 10px 30px #0008;border-radius:22px}.field{width:100%;background:#05081499;border:1px solid #ffffff26;border-radius:14px;padding:13px;color:white;outline:none}.field:focus{border-color:#0295e5;box-shadow:0 0 0 3px #0295e533}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.primary{background:#0295e5;color:white;border-radius:14px;padding:12px 18px;font-weight:800}.secondary{background:#ffffff12;border:1px solid #ffffff25;border-radius:14px;padding:10px 14px}.active{background:#0295e5!important;border-color:#0295e5!important;color:white!important}.voice{border:1px solid #ffffff25;border-radius:14px;padding:12px;text-align:left;background:#ffffff08}.voice.selected{border-color:#0295e5;background:#0295e533}
+</style>
+</head>
+<body><div id="root"></div>
+<script type="text/babel">
+const {useState}=React;
+const SB_URL="https://ovqhioywonnaglctwvne.supabase.co";
+const SB_KEY="sb_publishable_koVn1Hk8RwBZDMhwh9_TZA_n3IoIhez";
+const supabase=window.supabase.createClient(SB_URL,SB_KEY);
+const voices=[
+["Aoede","Anita","Ramah & Ceria (Wanita)","Female"],["Leda","Siti","Lembut & Sopan (Wanita)","Female"],["Charon","Agus","Deep & Naratif (Pria)","Male"],["Despina","Dewi","Energik & Lugas (Wanita)","Female"],["Callirrhoe","Tina","Profesional & Jelas (Wanita)","Female"],["Autonoe","Maya","Inspiratif & Hangat (Wanita)","Female"],["Puck","Rian","Muda & Bersemangat (Pria)","Male"],["Erinome","Indah","Halus & Menenangkan (Wanita)","Female"],["Fenrir","Gading","Berat & Maskulin (Pria)","Male"],["Laomedeia","Shinta","Tegas & Berani (Wanita)","Female"],["Orus","Bayu","Santai & Sejuk (Pria)","Male"],["Algenib","Adi","Ceria & Bersemangat (Pria)","Male"],["Iapetus","Eko","Serius & Edukatif (Pria)","Male"],["Achernar","Laras","Anggun & Elegan (Wanita)","Female"]
+].map(([id,name,desc,gender])=>({id,name,desc,gender}));
+const tones=["Formal","Semi Formal","Casual","Lucu"];
+async function gemini(model,payload){
+ const {data,error}=await supabase.auth.getSession();
+ if(error||!data.session)throw new Error("Sesi login berakhir. Silakan login kembali.");
+ const res=await fetch(SB_URL+"/functions/v1/gemini-proxy",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+data.session.access_token,"apikey":SB_KEY},body:JSON.stringify({model,payload})});
+ const json=await res.json().catch(()=>({}));
+ if(!res.ok)throw new Error(json.error?.message||json.error||"Permintaan AI gagal ("+res.status+").");
+ return json;
+}
+function pcmToWav(base64){
+ const raw=atob(base64),bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
+ const pcm=new Int16Array(bytes.buffer),buffer=new ArrayBuffer(44+pcm.length*2),v=new DataView(buffer);
+ v.setUint32(0,0x52494646,false);v.setUint32(4,36+pcm.length*2,true);v.setUint32(8,0x57415645,false);v.setUint32(12,0x666d7420,false);v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,24000,true);v.setUint32(28,48000,true);v.setUint16(32,2,true);v.setUint16(34,16,true);v.setUint32(36,0x64617461,false);v.setUint32(40,pcm.length*2,true);
+ for(let i=0;i<pcm.length;i++)v.setInt16(44+i*2,pcm[i],true);return URL.createObjectURL(new Blob([buffer],{type:"audio/wav"}));
+}
+function App(){
+ const [view,setView]=useState("studio"),[text,setText]=useState(""),[voice,setVoice]=useState(voices[0]),[emotion,setEmotion]=useState("Netral"),[speed,setSpeed]=useState(1),[pitch,setPitch]=useState(0);
+ const [speaker1,setSpeaker1]=useState(voices[2]),[speaker2,setSpeaker2]=useState(voices[0]),[dialogueEmotion,setDialogueEmotion]=useState("Netral"),[dialogue,setDialogue]=useState("Orang 1: Halo, selamat pagi! Bagaimana kabarmu hari ini?\nOrang 2: Pagi juga! Kabarku sangat baik, terima kasih. Bagaimana dengan fitur baru S-teamvoice Pro ini?\nOrang 1: Luar biasa! Sekarang kita bisa buat percakapan dua suara sekaligus.");
+ const [product,setProduct]=useState(""),[desc,setDesc]=useState(""),[tone,setTone]=useState("Casual"),[busy,setBusy]=useState(false),[copyBusy,setCopyBusy]=useState(false),[audio,setAudio]=useState(""),[history,setHistory]=useState([]),[notice,setNotice]=useState("");
+ const fail=e=>{console.error(e);setNotice(e.message||"Terjadi kesalahan. Silakan coba lagi.");};
+ const addHistory=(url,label,emo)=>setHistory(h=>[{id:Date.now(),url,label,emo,date:new Date().toLocaleTimeString("id-ID")},...h]);
+ async function makeCopy(){
+ if(!product.trim()||!desc.trim()){setNotice("Isi Nama Produk dan Deskripsi terlebih dahulu.");return}
+ setCopyBusy(true);setNotice("");setText("Sedang merancang naskah iklan 60 detik...");
+ const prompt="Tulis naskah iklan radio/suara AI berdurasi 60 detik dalam bahasa Indonesia. Nama Produk: "+product+". Deskripsi & Keunggulan: "+desc+". Gaya bahasa: "+tone+". Buat 140-160 kata dengan struktur Hook, Problem & Solution, Benefit & Emotion, Call to Action. Tulis HANYA teks naskah murni tanpa judul, timestamp, atau petunjuk panggung.";
+ try{let r=await gemini("gemini-2.5-flash",{contents:[{parts:[{text:prompt}]}]});let t=r?.candidates?.[0]?.content?.parts?.[0]?.text;if(!t){r=await gemini("gemini-1.5-flash",{contents:[{parts:[{text:prompt}]}]});t=r?.candidates?.[0]?.content?.parts?.[0]?.text}if(!t)throw Error("Naskah tidak berhasil dibuat.");setText(t.trim())}catch(e){setText("");fail(e)}finally{setCopyBusy(false)}
+ }
+ async function makeAudio(){
+ if(!text.trim())return;setBusy(true);setAudio("");setNotice("");
+ const male=voice.gender==="Male",pitchText=pitch>2?"Gunakan nada suara tinggi.":pitch< -2?"Gunakan nada suara rendah/dalam.":"Gunakan nada suara normal.",speedText=speed>1.2?"Bicaralah dengan tempo cepat.":speed<.8?"Bicaralah dengan tempo lambat.":"Bicaralah dengan tempo sedang/normal.";
+ const prompt="[INSTRUKSI SUARA] Nama pengisi suara: "+voice.name+". Gender vokal wajib: "+(male?"PRIA":"WANITA")+". Karakter: "+voice.desc+". Ekspresi: "+emotion+". "+pitchText+" "+speedText+" Bacakan naskah berikut secara konsisten: \""+text+"\"";
+ try{const r=await gemini("gemini-2.5-flash-preview-tts",{contents:[{parts:[{text:prompt}]}],generationConfig:{responseModalities:["AUDIO"],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:voice.id}}}}});const d=r?.candidates?.[0]?.content?.parts?.find(p=>p.inlineData)?.inlineData?.data;if(!d)throw Error("Gemini tidak mengembalikan audio.");const u=pcmToWav(d);setAudio(u);addHistory(u,voice.name,emotion)}catch(e){fail(e)}finally{setBusy(false)}
+ }
+ async function makeDialogue(){
+ if(!dialogue.trim())return;setBusy(true);setAudio("");setNotice("");
+ const prompt="[INSTRUKSI PERAN PERCAKAPAN] Orang 1: "+speaker1.name+" ("+(speaker1.gender==="Male"?"suara pria":"suara wanita")+"). Orang 2: "+speaker2.name+" ("+(speaker2.gender==="Male"?"suara pria":"suara wanita")+"). Ekspresi: "+dialogueEmotion+". Bacakan percakapan berikut sesuai peran masing-masing:\n"+dialogue;
+ try{const r=await gemini("gemini-2.5-flash-preview-tts",{contents:[{parts:[{text:prompt}]}],generationConfig:{responseModalities:["AUDIO"],speechConfig:{multiSpeakerVoiceConfig:{speakerVoiceConfigs:[{speaker:"Orang 1",voiceConfig:{prebuiltVoiceConfig:{voiceName:speaker1.id}}},{speaker:"Orang 2",voiceConfig:{prebuiltVoiceConfig:{voiceName:speaker2.id}}}]}}}});const d=r?.candidates?.[0]?.content?.parts?.find(p=>p.inlineData)?.inlineData?.data;if(!d)throw Error("Gemini tidak mengembalikan audio dialog.");const u=pcmToWav(d);setAudio(u);addHistory(u,speaker1.name+" + "+speaker2.name,"Dialog ("+dialogueEmotion+")")}catch(e){fail(e)}finally{setBusy(false)}
+ }
+ const selectVoice=(value,onChange)=> <select className="field" value={value.id} onChange={e=>onChange(voices.find(v=>v.id===e.target.value))}>{voices.map(v=><option key={v.id} value={v.id}>{v.name} — {v.desc}</option>)}</select>;
+ return <div className="min-h-screen">
+ <header className="sticky top-0 z-20 border-b border-white/10 bg-[#060A17dd] backdrop-blur-xl"><div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3"><div><div className="display text-lg">S-TeamVoice <span style={{color:"#38bdf8"}}>Pro</span></div><div className="text-xs text-slate-400">by s-teamcreative.id</div></div><nav className="flex flex-wrap gap-2">{[["studio","🎙 STUDIO"],["dialogue","👥 DIALOG"],["ads","📢 ADS MODE"],["history","◷ RIWAYAT"]].map(([id,label])=><button key={id} onClick={()=>setView(id)} className={"secondary text-xs "+(view===id?"active":"")}>{label}</button>)}</nav></div></header>
+ <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+ {notice&&<div className="glass p-4 border border-amber-400/40 text-amber-200 flex justify-between gap-3"><span>{notice}</span><button onClick={()=>setNotice("")}>✕</button></div>}
+ {(view==="studio"||view==="ads")&&<React.Fragment>
+ {view==="ads"&&<section className="glass p-6 space-y-4"><div className="display text-sky-300">Ads Audio Generator</div><div className="grid md:grid-cols-2 gap-4"><label className="text-sm">Nama Produk<input className="field mt-2" value={product} onChange={e=>setProduct(e.target.value)} placeholder="Nama produk"/></label><label className="text-sm">Gaya Bahasa<select className="field mt-2" value={tone} onChange={e=>setTone(e.target.value)}>{tones.map(t=><option>{t}</option>)}</select></label></div><label className="text-sm">Deskripsi Singkat & Solusi Produk<textarea className="field mt-2 h-24" value={desc} onChange={e=>setDesc(e.target.value)}/></label><button className="primary w-full" disabled={copyBusy} onClick={makeCopy}>{copyBusy?"MENYUSUN NASKAH...":"✨ GENERATE NASKAH"}</button></section>}
+ <section className="glass p-6 space-y-3"><div className="flex justify-between gap-3"><h2 className="display text-sm">{view==="ads"?"Naskah Copywriting":"Input Teks"}</h2><span className="text-xs text-slate-400">{text.trim()?text.trim().split(/\s+/).length+" kata":""}</span></div><textarea className="field h-56" value={text} onChange={e=>setText(e.target.value)} placeholder="Tulis naskah Anda di sini..."/></section>
+ <section className="glass p-6 space-y-4"><h2 className="display text-sm">Pilih Karakter Suara ({voices.length})</h2><div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">{voices.map(v=><button key={v.id} onClick={()=>setVoice(v)} className={"voice "+(voice.id===v.id?"selected":"")}><div className="font-bold">{v.name}</div><div className="text-xs text-slate-400">{v.desc}</div></button>)}</div><div className="grid sm:grid-cols-3 gap-4"><label className="text-sm">Ekspresi Emosi<select className="field mt-2" value={emotion} onChange={e=>setEmotion(e.target.value)}>{["Netral","Ramah","Semangat","Tenang","Storytelling","Profesional","Marah","Sad","Whisper"].map(x=><option>{x}</option>)}</select></label><label className="text-sm">Kecepatan ({speed.toFixed(1)})<input className="field mt-2" type="range" min=".5" max="1.5" step=".1" value={speed} onChange={e=>setSpeed(+e.target.value)}/></label><label className="text-sm">Pitch ({pitch})<input className="field mt-2" type="range" min="-5" max="5" step="1" value={pitch} onChange={e=>setPitch(+e.target.value)}/></label></div><button className="primary w-full" disabled={busy||!text.trim()} onClick={makeAudio}>{busy?"MEMBUAT AUDIO...":"▶ GENERATE AUDIO"}</button></section>
+ </React.Fragment>}
+ {view==="dialogue"&&<section className="glass p-6 space-y-4"><h2 className="display text-sky-300">Multi-Speaker Dialogue</h2><div className="grid md:grid-cols-2 gap-4"><label className="text-sm">Orang 1 — Suara<select className="field mt-2" value={speaker1.id} onChange={e=>setSpeaker1(voices.find(v=>v.id===e.target.value))}>{voices.map(v=><option value={v.id}>{v.name} — {v.gender}</option>)}</select></label><label className="text-sm">Orang 2 — Suara<select className="field mt-2" value={speaker2.id} onChange={e=>setSpeaker2(voices.find(v=>v.id===e.target.value))}>{voices.map(v=><option value={v.id}>{v.name} — {v.gender}</option>)}</select></label></div><label className="text-sm">Ekspresi<select className="field mt-2" value={dialogueEmotion} onChange={e=>setDialogueEmotion(e.target.value)}>{["Netral","Ramah","Semangat","Tenang","Storytelling","Profesional"].map(x=><option>{x}</option>)}</select></label><label className="text-sm">Naskah Dialog<textarea className="field h-64 mt-2" value={dialogue} onChange={e=>setDialogue(e.target.value)}/></label><button className="primary w-full" disabled={busy} onClick={makeDialogue}>{busy?"MEMBUAT DIALOG...":"▶ GENERATE DIALOG AUDIO"}</button></section>}
+ {audio&&<section className="glass p-6 space-y-3"><div className="display text-sm">Audio Siap Diputar</div><audio controls src={audio} className="w-full"/><a className="primary inline-block" href={audio} download="s-teamvoice-pro.wav">⬇ Download WAV</a></section>}
+ {view==="history"&&<section className="glass p-6 space-y-4"><div className="display">Riwayat Audio</div>{history.length===0?<p className="text-slate-400">Belum ada riwayat pada sesi ini.</p>:history.map(h=><div key={h.id} className="border-b border-white/10 pb-4 space-y-2"><div className="font-semibold">{h.label} · {h.emo}</div><div className="text-xs text-slate-400">{h.date}</div><audio controls src={h.url} className="w-full"/><div className="flex gap-3"><a className="secondary text-sm" href={h.url} download="s-teamvoice-history.wav">Download</a><button className="secondary text-sm" onClick={()=>setHistory(a=>a.filter(x=>x.id!==h.id))}>Hapus</button></div></div>)}</section>}
+ </main><footer className="text-center text-xs text-slate-500 py-10 border-t border-white/10 mt-10">© 2026 S-TeamVoice Pro by s-teamcreative.id</footer></div>
+}
+async function start(){
+ const {data,error}=await supabase.auth.getSession();
+ if(error||!data.session){location.replace("../../login.html?reason=required");return}
+ const {data:userData,error:userError}=await supabase.auth.getUser();
+ if(userError||!userData.user){location.replace("../../login.html?reason=invalid");return}
+ const {data:profile,error:profileError}=await supabase.from("profiles").select("is_active").eq("id",userData.user.id).maybeSingle();
+ if(profileError||!profile||profile.is_active!==true){await supabase.auth.signOut();location.replace("../../login.html?reason=inactive");return}
+ ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+}
+start();
+</script></body></html>
