@@ -50,6 +50,81 @@
             text-align: justify;
             text-justify: inter-word;
         }
+        /* Kunci ukuran kartu agar seluruh kartu sejajar, termasuk dalam baris horizontal */
+        #productGrid .category-card-row > article,
+        #productGrid:not(.all-features-row) > article {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            box-sizing: border-box !important;
+            height: 460px !important;
+            min-height: 460px !important;
+            max-height: 460px !important;
+            flex: 0 0 min(86vw, 360px) !important;
+            overflow: hidden !important;
+        }
+        #productGrid .category-card-row > article > div:first-child,
+        #productGrid:not(.all-features-row) > article > div:first-child {
+            min-height: 0 !important;
+            overflow: hidden !important;
+        }
+        #productGrid .category-card-row > article .app-preview-frame,
+        #productGrid:not(.all-features-row) > article .app-preview-frame {
+            height: 130px !important;
+            min-height: 130px !important;
+            max-height: 130px !important;
+        }
+        #productGrid .category-card-row > article h3,
+        #productGrid:not(.all-features-row) > article h3 {
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-line-clamp: 2 !important;
+            overflow: hidden !important;
+        }
+        @media (max-width: 640px) {
+            #productGrid .category-card-row > article,
+            #productGrid:not(.all-features-row) > article {
+                height: 440px !important;
+                min-height: 440px !important;
+                max-height: 440px !important;
+            }
+        }
+        /* Scroll horizontal khusus tab Semua Fitur */
+        #productGrid.all-features-row { display:flex; flex-direction:column; gap:2rem; }
+        .category-feature-section { min-width:0; }
+        .category-feature-heading { margin:0 0 .9rem; font-family:'Archivo Black',sans-serif; font-size:.95rem; letter-spacing:.08em; text-transform:uppercase; color:#fff; }
+        .category-card-row { display:flex; flex-wrap:nowrap; gap:1.5rem; overflow-x:auto; overflow-y:hidden; padding:.25rem 0 1rem; scroll-snap-type:x mandatory; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; scrollbar-width:thin; scrollbar-color:rgba(148,163,184,.45) transparent; }
+        .category-card-row > article { flex:0 0 min(86vw,360px); width:min(86vw,360px); scroll-snap-align:start; }
+        .category-card-row::-webkit-scrollbar { height:7px; }
+        .category-card-row::-webkit-scrollbar-thumb { background:rgba(148,163,184,.45); border-radius:999px; }
+        .category-card-row::-webkit-scrollbar-track { background:rgba(255,255,255,.04); border-radius:999px; }
+        /* Baris kartu: tinggi dan posisi bawah wajib identik, termasuk Affiliate Generator */
+        #productGrid .category-card-row {
+            align-items: flex-start !important;
+        }
+        #productGrid .category-card-row > article {
+            align-self: flex-start !important;
+            flex-shrink: 0 !important;
+            height: 460px !important;
+            min-height: 460px !important;
+            max-height: 460px !important;
+            box-sizing: border-box !important;
+        }
+        #productGrid .category-card-row > article > div:last-child {
+            flex: 0 0 auto !important;
+            margin-top: auto !important;
+        }
+        #productGrid .category-card-row > article > div:first-child {
+            flex: 1 1 auto !important;
+            min-height: 0 !important;
+        }
+        @media (max-width: 640px) {
+            #productGrid .category-card-row > article {
+                height: 440px !important;
+                min-height: 440px !important;
+                max-height: 440px !important;
+            }
+        }
         /* Ambient Mesh & Liquid Glass Utilities (iOS 27 Dark Glass Theme) */
         body {
             background-color: #050814;
@@ -77,6 +152,35 @@
             background: linear-gradient(155deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.04) 100%);
             border-color: rgba(255, 255, 255, 0.28);
             box-shadow: 0 20px 45px -10px rgba(2, 149, 229, 0.28), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+        }
+        /* Animasi halus untuk popup pemberitahuan hak cipta */
+        @keyframes copyrightFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes copyrightModalEnter {
+            from { opacity: 0; transform: translateY(18px) scale(.97); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        @keyframes copyrightIconPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,.12); }
+            50% { box-shadow: 0 0 0 9px rgba(251,191,36,0); }
+        }
+        #copyrightNotice:not(.hidden) {
+            animation: copyrightFadeIn .35s ease-out both;
+        }
+        #copyrightNotice:not(.hidden) > .ios-glass-modal {
+            animation: copyrightModalEnter .5s cubic-bezier(.2,.8,.2,1) both;
+        }
+        #copyrightNotice:not(.hidden) [data-lucide="shield-alert"] {
+            animation: copyrightIconPulse 2.2s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #copyrightNotice:not(.hidden),
+            #copyrightNotice:not(.hidden) > .ios-glass-modal,
+            #copyrightNotice:not(.hidden) [data-lucide="shield-alert"] {
+                animation: none !important;
+            }
         }
         .ios-glass-modal {
             background: linear-gradient(160deg, rgba(16, 23, 46, 0.82) 0%, rgba(8, 12, 26, 0.90) 100%);
@@ -899,6 +1003,15 @@
             const grid = document.getElementById('productGrid');
             const emptyState = document.getElementById('emptyState');
             const countEl = document.getElementById('itemCount');
+            // Tab Semua memakai baris horizontal per kategori.
+            // Tab kategori memakai grid vertikal dengan maksimal 3 kartu per baris.
+            const isAllCategories = currentCategory === 'all';
+            const cardWidthClass = isAllCategories
+                ? 'w-[min(86vw,360px)] shrink-0 snap-start'
+                : 'w-full min-w-0';
+            grid.className = isAllCategories
+                ? 'all-features-row'
+                : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch';
 
             const filtered = products.filter(item => {
                 const matchCat = currentCategory === 'all' || item.category === currentCategory;
@@ -930,7 +1043,7 @@
                 // Tampilan Khusus Kartu Coming Soon
                 if (item.comingSoon) {
                     return `
-                    <article class="ios-glass-card h-full min-h-0 rounded-3xl p-6 flex flex-col justify-between opacity-75 border-dashed border-white/20">
+                    <article class="${cardWidthClass} ios-glass-card h-full min-h-0 rounded-3xl p-6 flex flex-col justify-between opacity-75 border-dashed border-white/20">
                         <div>
                             <div class="flex items-start justify-between gap-3 mb-5">
                                 <div class="w-12 h-12 rounded-2xl bg-white/5 text-slate-400 border border-white/10 flex items-center justify-center">
@@ -985,7 +1098,7 @@
                 `;
 
                 return `
-                <article onclick="openProductModal(${item.id})" class="group cursor-pointer ios-glass-card h-full min-h-0 rounded-3xl p-6 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
+                <article onclick="openProductModal(${item.id})" class="group cursor-pointer ${cardWidthClass} ios-glass-card h-full min-h-0 rounded-3xl p-6 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between">
                     <div>
                         <!-- Top Row: Icon & Category Badge -->
                         <div class="flex items-start justify-between gap-3 mb-5">
@@ -1027,6 +1140,25 @@
                 </article>
                 `;
             }).join('');
+
+            if (currentCategory === 'all') {
+                const renderedCards = Array.from(grid.children);
+                grid.innerHTML = '';
+                ['Application', 'Materi', 'Bahan Siap Upload'].forEach(category => {
+                    const categoryCards = filtered.map((item, index) => ({ item, card: renderedCards[index] })).filter(entry => entry.item.category === category);
+                    if (!categoryCards.length) return;
+                    const section = document.createElement('section');
+                    section.className = 'category-feature-section';
+                    const heading = document.createElement('h2');
+                    heading.className = 'category-feature-heading';
+                    heading.textContent = category;
+                    const row = document.createElement('div');
+                    row.className = 'category-card-row';
+                    categoryCards.forEach(entry => row.appendChild(entry.card));
+                    section.append(heading, row);
+                    grid.appendChild(section);
+                });
+            }
 
             if (window.lucide) lucide.createIcons();
         }

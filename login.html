@@ -109,6 +109,26 @@
     .message { display: none; }
     .message.show { display: flex; }
 
+    .login-transition {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; background: rgba(3,7,18,.88);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease;
+    }
+    .login-transition.show { opacity: 1; visibility: visible; }
+    .transition-orbit {
+      width: 76px; height: 76px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.10);
+      border-top-color: #0295E5; border-right-color: #84D12C;
+      animation: portal-spin .9s linear infinite;
+      box-shadow: 0 0 28px rgba(2,149,229,.16);
+    }
+    @keyframes portal-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .transition-orbit { animation-duration: 2.5s; }
+    }
+
     input:-webkit-autofill {
       -webkit-text-fill-color: #fff;
       transition: background-color 9999s ease-in-out 0s;
@@ -117,6 +137,23 @@
 </head>
 
 <body class="text-slate-100 antialiased flex flex-col min-h-screen relative overflow-x-hidden">
+
+  <!-- LOADING TRANSISI SETELAH LOGIN BERHASIL -->
+  <div id="loginTransition" class="login-transition" aria-live="polite" aria-hidden="true">
+    <div class="flex flex-col items-center text-center">
+      <div class="relative flex items-center justify-center mb-7">
+        <div class="transition-orbit"></div>
+        <span class="absolute font-display text-2xl text-white">S</span>
+      </div>
+      <h2 class="font-display text-lg sm:text-xl text-white uppercase tracking-wide">Login Berhasil</h2>
+      <p class="mt-2 text-sm text-slate-300">Menyiapkan portal S-TeamCreative...</p>
+      <div class="mt-5 flex gap-1.5">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-blue animate-pulse"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-green animate-pulse [animation-delay:150ms]"></span>
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-amber animate-pulse [animation-delay:300ms]"></span>
+      </div>
+    </div>
+  </div>
 
   <!-- BACKGROUND -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
@@ -591,12 +628,18 @@
           throw new Error('Sesi login tidak berhasil dibuat.');
         }
 
-        showMessage('Login berhasil! Mengarahkan ke portal...', 'success');
+        // Ganti pesan sukses dengan layar loading transisi sebelum masuk portal.
+        const transition = document.getElementById('loginTransition');
+        transition.classList.add('show');
+        transition.setAttribute('aria-hidden', 'false');
+        loginButtonText.textContent = 'MENYIAPKAN PORTAL...';
+        loginButtonIcon.classList.add('hidden');
+        loginSpinner.classList.remove('hidden');
 
-        // Redirect after successful authentication
+        // Beri waktu singkat agar efek loading terlihat, lalu masuk ke portal.
         setTimeout(() => {
           window.location.replace('index.html');
-        }, 800);
+        }, 900);
 
       } catch (error) {
 
