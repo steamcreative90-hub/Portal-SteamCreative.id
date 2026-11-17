@@ -50,29 +50,43 @@
             text-align: justify;
             text-justify: inter-word;
         }
-        /* Samakan dimensi seluruh kartu aplikasi pada semua kategori */
-        #productGrid article {
-            height: 460px;
-            min-height: 460px;
-            box-sizing: border-box;
+        /* Kunci ukuran kartu agar seluruh kartu sejajar, termasuk dalam baris horizontal */
+        #productGrid .category-card-row > article,
+        #productGrid:not(.all-features-row) > article {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            box-sizing: border-box !important;
+            height: 460px !important;
+            min-height: 460px !important;
+            max-height: 460px !important;
+            flex: 0 0 min(86vw, 360px) !important;
+            overflow: hidden !important;
         }
-        #productGrid article > div:first-child {
-            min-height: 0;
-            overflow: hidden;
+        #productGrid .category-card-row > article > div:first-child,
+        #productGrid:not(.all-features-row) > article > div:first-child {
+            min-height: 0 !important;
+            overflow: hidden !important;
         }
-        #productGrid .app-preview-frame {
+        #productGrid .category-card-row > article .app-preview-frame,
+        #productGrid:not(.all-features-row) > article .app-preview-frame {
             height: 130px !important;
+            min-height: 130px !important;
+            max-height: 130px !important;
         }
-        #productGrid article h3 {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
+        #productGrid .category-card-row > article h3,
+        #productGrid:not(.all-features-row) > article h3 {
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-line-clamp: 2 !important;
+            overflow: hidden !important;
         }
         @media (max-width: 640px) {
-            #productGrid article {
-                height: 440px;
-                min-height: 440px;
+            #productGrid .category-card-row > article,
+            #productGrid:not(.all-features-row) > article {
+                height: 440px !important;
+                min-height: 440px !important;
+                max-height: 440px !important;
             }
         }
         /* Scroll horizontal khusus tab Semua Fitur */
