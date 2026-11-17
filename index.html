@@ -125,6 +125,80 @@
                 max-height: 440px !important;
             }
         }
+        /* Navbar responsif: logo, identitas akun, dan tombol logout tetap utuh di HP */
+        @media (max-width: 640px) {
+            header > div {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            header > div > div {
+                height: 68px !important;
+                min-height: 68px !important;
+                gap: 8px !important;
+                justify-content: space-between !important;
+            }
+            header a.group {
+                min-width: 0 !important;
+                flex: 1 1 auto !important;
+                gap: 6px !important;
+                overflow: hidden !important;
+            }
+            header a.group > div:first-child {
+                width: 34px !important;
+                height: 38px !important;
+                flex: 0 0 34px !important;
+            }
+            header a.group > div:last-child {
+                min-width: 0 !important;
+                overflow: hidden !important;
+            }
+            header a.group > div:last-child > span:first-child {
+                display: block !important;
+                white-space: nowrap !important;
+                font-size: 12px !important;
+                letter-spacing: -0.045em !important;
+                line-height: 1 !important;
+            }
+            header a.group > div:last-child > span:last-child {
+                display: none !important;
+            }
+            header nav {
+                display: none !important;
+            }
+            header .ml-3.flex.items-center {
+                margin-left: 0 !important;
+                flex: 0 0 auto !important;
+                gap: 6px !important;
+            }
+            header .ml-3.flex.items-center > div {
+                padding: 6px 7px !important;
+                gap: 6px !important;
+            }
+            header .ml-3.flex.items-center > div > span {
+                width: 28px !important;
+                height: 28px !important;
+            }
+            #portalUsername {
+                max-width: 62px !important;
+                font-size: 10px !important;
+            }
+            #portalUserRole {
+                display: none !important;
+            }
+            header .ml-3.flex.items-center > button {
+                width: 36px !important;
+                height: 36px !important;
+                flex: 0 0 36px !important;
+            }
+        }
+        @media (max-width: 360px) {
+            header a.group > div:last-child > span:first-child {
+                font-size: 10px !important;
+            }
+            #portalUsername {
+                max-width: 48px !important;
+            }
+        }
         /* Ambient Mesh & Liquid Glass Utilities (iOS 27 Dark Glass Theme) */
         body {
             background-color: #050814;
