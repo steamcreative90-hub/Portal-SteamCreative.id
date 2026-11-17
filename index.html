@@ -42,7 +42,7 @@
     <style>
         /* Sembunyikan portal sampai sesi Supabase tervalidasi */
         html.auth-pending body { visibility: hidden !important; }
-        html.auth-denied body { display: none !important; }
+        html.auth-denied body { display: none !important; }\n        html.copyright-pending body > :not(#copyrightNotice) { visibility: hidden !important; }\n        html.copyright-pending #copyrightNotice { visibility: visible !important; }
         /* Perataan teks global: konten paragraf dan daftar rata kiri-kanan */
         p, li, #modalFeatures span {
             text-align: justify;
@@ -88,7 +88,7 @@
     <!-- Supabase Auth: wajib login dan profil harus aktif -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        document.documentElement.classList.add('auth-pending');
+        document.documentElement.classList.add('auth-pending', 'copyright-pending');
 
         (function () {
             const SUPABASE_URL = 'https://ovqhioywonnaglctwvne.supabase.co';
