@@ -42,6 +42,8 @@
     <style>
         /* Sembunyikan portal sampai sesi Supabase tervalidasi */
         html.auth-pending body { visibility: hidden !important; }
+        html.auth-error body > :not(#portalAuthError) { visibility: hidden !important; }
+        html.auth-error #portalAuthError { display: flex !important; }
         html.auth-denied body { display: none !important; }
         html.copyright-pending body > :not(#copyrightNotice) { visibility: hidden !important; }
         html.copyright-pending #copyrightNotice { visibility: visible !important; }
@@ -347,7 +349,26 @@
                 }
             }
 
-            window.portalAuthReady = validatePortalAccess();
+            function showPortalAuthError(error) {
+                console.error('Portal session check timed out or failed:', error);
+                document.documentElement.classList.remove('auth-pending');
+                document.documentElement.classList.add('auth-error');
+                const errorPanel = document.getElementById('portalAuthError');
+                if (errorPanel) errorPanel.classList.remove('hidden');
+                if (window.lucide) window.lucide.createIcons();
+            }
+
+            // Hindari halaman gelap tanpa batas jika jaringan atau Supabase tidak merespons.
+            window.portalAuthReady = Promise.race([
+                validatePortalAccess(),
+                new Promise((_, reject) => setTimeout(
+                    () => reject(new Error('Pemeriksaan sesi melewati batas waktu 15 detik.')),
+                    15000
+                ))
+            ]).catch(error => {
+                showPortalAuthError(error);
+                return false;
+            });
 
             window.logoutPortal = async function () {
                 try {
@@ -361,6 +382,19 @@
 
 </head>
 <body class="text-slate-100 antialiased selection:bg-brand-blue/30 selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Pesan bantuan jika pemeriksaan sesi tidak mendapat respons -->
+    <section id="portalAuthError" class="fixed inset-0 z-[200] hidden items-center justify-center bg-[#050814] p-6 text-center" role="alert" aria-live="assertive">
+        <div class="ios-glass-modal w-full max-w-lg rounded-3xl p-8">
+            <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-400/30 bg-amber-400/10 text-amber-300"><i data-lucide="wifi-off" class="h-7 w-7"></i></div>
+            <h1 class="mb-3 font-display text-lg text-white">PORTAL BELUM DAPAT DIMUAT</h1>
+            <p class="mb-6 text-sm leading-relaxed text-slate-300">Pemeriksaan sesi login belum mendapat respons dari layanan autentikasi. Akun kamu belum dinyatakan masuk. Periksa koneksi internet, lalu coba muat ulang atau login kembali.</p>
+            <div class="flex flex-col gap-3 sm:flex-row">
+                <button type="button" onclick="window.location.reload()" class="flex-1 rounded-xl bg-brand-blue px-5 py-3 font-display text-xs text-white">COBA MUAT ULANG</button>
+                <a href="login.html" class="flex-1 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-display text-xs text-white">KEMBALI KE LOGIN</a>
+            </div>
+        </div>
+    </section>
 
     <!-- Pemberitahuan Hak Cipta: wajib disetujui setelah login -->
     <div id="copyrightNotice" class="fixed inset-0 z-[100] hidden items-center justify-center bg-[#020617]/90 backdrop-blur-xl p-4" role="dialog" aria-modal="true" aria-labelledby="copyrightNoticeTitle">
@@ -1421,7 +1455,8 @@
         // Inisialisasi portal hanya setelah sesi dan profil Supabase tervalidasi.
         window.addEventListener('DOMContentLoaded', async () => {
             try {
-                await window.portalAuthReady;
+                const authReady = await window.portalAuthReady;
+                if (!authReady || document.documentElement.classList.contains('auth-error')) return;
                 if (document.documentElement.classList.contains('auth-pending') ||
                     document.documentElement.classList.contains('auth-denied')) {
                     return;
