@@ -43,6 +43,11 @@
         /* Sembunyikan portal sampai sesi Supabase tervalidasi */
         html.auth-pending body { visibility: hidden !important; }
         html.auth-denied body { display: none !important; }
+        /* Perataan teks global: konten paragraf dan daftar rata kiri-kanan */
+        p, li, #modalFeatures span {
+            text-align: justify;
+            text-justify: inter-word;
+        }
         /* Ambient Mesh & Liquid Glass Utilities (iOS 27 Dark Glass Theme) */
         body {
             background-color: #050814;
