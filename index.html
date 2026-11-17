@@ -905,9 +905,9 @@
             const grid = document.getElementById('productGrid');
             const emptyState = document.getElementById('emptyState');
             const countEl = document.getElementById('itemCount');
-            const isAllFeatures = currentCategory === 'all';
-            const cardWidthClass = isAllFeatures ? 'w-[min(86vw,360px)] shrink-0 snap-start' : '';
-            grid.className = isAllFeatures ? 'all-features-row' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+            // Semua kategori memakai satu baris kartu dengan gulir horizontal.
+            const cardWidthClass = 'w-[min(86vw,360px)] shrink-0 snap-start';
+            grid.className = 'all-features-row';
 
             const filtered = products.filter(item => {
                 const matchCat = currentCategory === 'all' || item.category === currentCategory;
