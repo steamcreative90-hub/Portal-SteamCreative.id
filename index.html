@@ -1386,7 +1386,7 @@
                 actionBtn.target = '_blank';
                 actionBtn.rel = 'noopener noreferrer';
                 actionBtn.onclick = null;
-                actionBtn.innerHTML = `<span>${item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka Aplikasi'}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
+                actionBtn.innerHTML = `<span>${item.category === 'Materi' ? 'Akses Materi' : item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka App'}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
             } else {
                 actionBtn.href = '#';
                 actionBtn.removeAttribute('target');
