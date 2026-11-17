@@ -467,7 +467,7 @@
                 title: "Konten Islami – Digital Content Collection",
                 category: "Bahan Siap Upload",
                 tag: "Islamic Digital Assets • Ready to Upload",
-                price: "Akses Google Drive",
+                price: "Akses Koleksi",
                 icon: "book-open",
                 shortDesc: "Koleksi aset digital Islami untuk mendukung produksi konten dakwah, edukasi, inspirasi, dan publikasi di berbagai platform media sosial.",
                 fullDesc: "Koleksi aset digital Islami yang dikurasi untuk mendukung kebutuhan produksi konten dakwah, edukasi, inspirasi, serta publikasi di berbagai platform media sosial. Paket ini menyediakan beragam materi digital yang dapat dimanfaatkan sebagai referensi maupun bahan publikasi untuk memperkaya konten Islami secara praktis dan efisien. Di dalamnya terdapat lebih dari 1.000 video Islami, 200 template Islami, kumpulan kisah Islami yang sarat pesan dan hikmah, koleksi murottal dari Muhammad Thaha Al Junaid, serta berbagai kumpulan murottal pilihan. Selain itu, tersedia 5.000 template Ramadhan untuk media sosial yang dapat menunjang kebutuhan publikasi selama bulan suci Ramadhan. Seluruh materi tersedia dalam satu direktori Google Drive sehingga memudahkan pengguna dalam mengakses, memilih, dan memanfaatkan berbagai aset sesuai kebutuhan. Solusi praktis bagi kreator konten, pengelola media sosial, maupun siapa pun yang membutuhkan referensi dan materi digital bertema Islami dalam satu koleksi lengkap.",
@@ -780,7 +780,7 @@
                             Detail
                         </button>
                         <a href="${item.link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-display text-[11px] uppercase tracking-wider text-white bg-brand-blue hover:bg-sky-400 shadow-[0_0_15px_rgba(2,149,229,0.4)] transition-all">
-                            <span>${item.category === 'Bahan Siap Upload' ? 'Buka Koleksi' : 'Buka App'}</span>
+                            <span>${item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka App'}</span>
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                         </a>
                     </div>
@@ -919,7 +919,7 @@
                 actionBtn.target = '_blank';
                 actionBtn.rel = 'noopener noreferrer';
                 actionBtn.onclick = null;
-                actionBtn.innerHTML = `<span>${item.category === 'Bahan Siap Upload' ? 'Buka Koleksi' : 'Buka Aplikasi'}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
+                actionBtn.innerHTML = `<span>${item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka Aplikasi'}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
             } else {
                 actionBtn.href = '#';
                 actionBtn.removeAttribute('target');
