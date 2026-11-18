@@ -769,6 +769,7 @@
             {
                 id: 13,
                 title: "KlipForge AI",
+                statusText: "UNLIMITED",
                 subtitle: "by s-teamcreative.id",
                 category: "Application",
                 tag: "AI Video Studio • Multi-Slide Generator",
@@ -1320,7 +1321,7 @@
                     <div class="pt-4 border-t border-white/10 flex flex-nowrap items-center justify-between gap-2">
                         <div class="min-w-0 shrink">
                             <span style="font-size:9px !important; line-height:1.2 !important;" class="font-pixel uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
-                            <span style="font-size:14px !important; line-height:1.25 !important;" class="font-display text-white whitespace-nowrap">${isExternalLink ? (item.category === 'Application' ? 'APLIKASI' : item.category === 'Materi' ? 'MATERI' : 'KOLEKSI') : item.price}</span>
+                            <span style="font-size:14px !important; line-height:1.25 !important;" class="font-display whitespace-nowrap ${item.statusText ? 'text-emerald-300 drop-shadow-[0_0_8px_rgba(52,211,153,0.35)]' : 'text-white'}">${isExternalLink ? (item.statusText || (item.category === 'Application' ? 'APLIKASI' : item.category === 'Materi' ? 'MATERI' : 'KOLEKSI')) : item.price}</span>
                         </div>
                         ${actionHtml}
                     </div>
