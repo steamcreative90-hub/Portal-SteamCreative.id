@@ -689,6 +689,7 @@
                 title: "S-Teamvoice Pro",
                 subtitle: "by s-teamcreative.id",
                 category: "Application",
+                statusText: "UNLIMITED",
                 tag: "AI Voice Generator • TTS",
                 price: "Akses Aplikasi",
                 icon: "mic",
@@ -708,6 +709,7 @@
                 title: "S-Team Affiliate Pro Generator",
                 subtitle: "by s-teamcreative.id",
                 category: "Application",
+                statusText: "UNLIMITED",
                 tag: "AI Content Studio • V6.1",
                 price: "Akses Aplikasi",
                 icon: "wand-2",
@@ -727,6 +729,7 @@
                 title: "YouTube Extractor Pro",
                 subtitle: "by s-teamcreative.id",
                 category: "Application",
+                statusText: "UNLIMITED",
                 tag: "AI YouTube Research • Pro Edition",
                 price: "Akses Aplikasi",
                 icon: "youtube",
@@ -749,6 +752,7 @@
                 title: "Prompt Generator",
                 subtitle: "by s-teamcreative.id",
                 category: "Application",
+                statusText: "UNLIMITED",
                 tag: "AI Prompt Studio • Video & Character",
                 price: "Akses Aplikasi",
                 icon: "clapperboard",
@@ -764,6 +768,28 @@
                     "Antarmuka iOS 27 Liquid Glass Dark: Desain modern, elegan, dan responsif untuk desktop maupun mobile."
                 ],
                 link: "https://share.gemini.google/5ym0sDqfX7JR"
+            },
+
+            {
+                id: 13,
+                title: "KlipForge AI",
+                subtitle: "by s-teamcreative.id",
+                category: "Application",
+                statusText: "UNLIMITED",
+                tag: "AI Video Studio • Multi-Slide Generator",
+                price: "Akses Aplikasi",
+                icon: "clapperboard",
+                previewType: "klipforge",
+                shortDesc: "KlipForge AI adalah studio generator video otomatis multi-slide. Cukup masukkan judul atau topik, AI membantu menyusun naskah, membuat visual adegan, menambahkan narasi suara, dan subtitle sinkron menjadi video utuh.",
+                fullDesc: "KlipForge AI by s-teamcreative.id adalah platform pembuatan video otomatis berbasis kecerdasan buatan untuk kreator konten, pendidik, dan pemasar digital. Cukup masukkan satu judul atau topik, lalu aplikasi membantu merangkai video multi-slide dengan naskah, visual, narasi, dan subtitle.",
+                features: [
+                    "51 Pilihan Gaya Animasi: Pilih berbagai estetika visual seperti Anime, 3D Pixar, Ghibli, Cyberpunk, Pixel Art, Stickman, dan gaya lainnya.",
+                    "Otomatisasi Naskah & Visual: AI menyusun naskah multi-slide, membuat ilustrasi adegan yang relevan, serta menghasilkan suara narator profesional melalui TTS.",
+                    "Subtitle Sinkron & Dinamis: Beragam gaya subtitle seperti Karaoke Pop dan Neon Glow dengan sinkronisasi kata demi kata.",
+                    "15 Efek Sinematik: Tambahkan transisi dan efek kamera dinamis seperti Zoom, Dolly, Camera Shake, dan Glitch.",
+                    "Multi-Job Background Render: Sistem antrean render latar belakang memungkinkan beberapa pekerjaan video diproses tanpa harus menunggu satu per satu."
+                ],
+                link: "https://share.gemini.google/Gh7nfqhA2Edk"
             },
 
             // KATEGORI: MATERI
@@ -957,6 +983,38 @@
 
         // Helper Render Mini UI Preview Aplikasi
         function getAppPreviewHtml(previewType) {
+            if (previewType === 'klipforge') {
+                return `
+                    <div class="mb-5 rounded-2xl bg-[#050A18]/95 border border-sky-400/20 p-3 shadow-inner overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                            <div class="flex items-center gap-1.5">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-lg bg-sky-500/15 border border-sky-400/30"><i data-lucide="play" class="w-3 h-3 text-sky-300"></i></span>
+                                <span class="font-display text-[9px] text-white">KLIPFORGE <span class="text-emerald-400">AI</span></span>
+                            </div>
+                            <span class="rounded-full bg-sky-500/10 border border-sky-400/25 px-2 py-0.5 font-pixel text-[7px] text-sky-300">51 STYLES</span>
+                        </div>
+                        <div class="rounded-xl border border-white/10 bg-gradient-to-br from-blue-500/20 via-slate-700/20 to-emerald-500/10 p-3 mb-2">
+                            <div class="text-center font-display text-[10px] leading-snug text-white">KETIK JUDUL, <span class="text-emerald-400">LANGSUNG JADI VIDEO UTUH</span></div>
+                            <div class="mt-2 rounded-lg border border-white/10 bg-white/5 px-2 py-2 text-[8px] text-slate-400">Contoh: Misteri Lubang Hitam Terbesar...</div>
+                            <div class="mt-2 flex gap-1.5">
+                                <span class="rounded-full bg-white/10 px-2 py-1 text-[7px] font-bold text-slate-300">KOREKSI JUDUL</span>
+                                <span class="rounded-full bg-white/10 px-2 py-1 text-[7px] font-bold text-slate-300">KEMBANGKAN IDE</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between text-[8px] text-slate-400">
+                            <span class="font-bold tracking-wider">51 GAYA ANIMASI</span>
+                            <span class="text-emerald-300">15 EFEK SINEMATIK</span>
+                        </div>
+                        <div class="mt-1.5 flex flex-wrap gap-1">
+                            <span class="rounded-md border border-sky-400/20 bg-sky-400/10 px-2 py-1 text-[7px] text-sky-200">Anime</span>
+                            <span class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[7px] text-slate-300">Pixar 3D</span>
+                            <span class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[7px] text-slate-300">Ghibli</span>
+                            <span class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[7px] text-slate-300">Cyberpunk</span>
+                            <span class="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-[7px] text-slate-300">Pixel Art</span>
+                        </div>
+                    </div>
+                `;
+            }
             if (previewType === 'voice') {
                 return `
                     <div class="mb-5 rounded-2xl bg-[#050A18]/90 border border-white/15 p-3 shadow-inner overflow-hidden">
@@ -1152,7 +1210,10 @@
                     item.tag.toLowerCase().includes(query);
                 return matchCat && matchSearch;
             }).sort((a, b) => {
-                // Kartu dengan tautan aktif selalu tampil lebih dahulu dalam kategorinya.
+                // Prioritas utama: KlipForge AI selalu berada di posisi pertama.
+                const klipForgePriority = Number(b.title === 'KlipForge AI') - Number(a.title === 'KlipForge AI');
+                if (klipForgePriority !== 0) return klipForgePriority;
+                // Setelah itu, kartu dengan tautan aktif tampil lebih dahulu.
                 const aHasLink = !a.comingSoon && typeof a.link === 'string' && a.link.startsWith('http');
                 const bHasLink = !b.comingSoon && typeof b.link === 'string' && b.link.startsWith('http');
                 return Number(bHasLink) - Number(aHasLink);
@@ -1267,7 +1328,7 @@
                     <div class="pt-4 border-t border-white/10 flex flex-nowrap items-center justify-between gap-2">
                         <div class="min-w-0 shrink">
                             <span style="font-size:9px !important; line-height:1.2 !important;" class="font-pixel uppercase text-slate-400 block">${isExternalLink ? 'Status' : 'Investasi'}</span>
-                            <span style="font-size:14px !important; line-height:1.25 !important;" class="font-display text-white whitespace-nowrap">${isExternalLink ? (item.category === 'Application' ? 'APLIKASI' : item.category === 'Materi' ? 'MATERI' : 'KOLEKSI') : item.price}</span>
+                            <span style="font-size:14px !important; line-height:1.25 !important;" class="font-display whitespace-nowrap ${item.statusText ? 'text-emerald-300 drop-shadow-[0_0_8px_rgba(52,211,153,0.35)]' : 'text-white'}">${isExternalLink ? (item.statusText || (item.category === 'Application' ? 'APLIKASI' : item.category === 'Materi' ? 'MATERI' : 'KOLEKSI')) : item.price}</span>
                         </div>
                         ${actionHtml}
                     </div>
