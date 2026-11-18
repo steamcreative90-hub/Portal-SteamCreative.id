@@ -1206,7 +1206,9 @@
                     item.tag.toLowerCase().includes(query);
                 return matchCat && matchSearch;
             }).sort((a, b) => {
-                // Kartu dengan tautan aktif selalu tampil lebih dahulu dalam kategorinya.
+                // KlipForge AI menjadi kartu pertama, lalu kartu dengan tautan aktif.
+                if (a.title === "KlipForge AI") return -1;
+                if (b.title === "KlipForge AI") return 1;
                 const aHasLink = !a.comingSoon && typeof a.link === 'string' && a.link.startsWith('http');
                 const bHasLink = !b.comingSoon && typeof b.link === 'string' && b.link.startsWith('http');
                 return Number(bHasLink) - Number(aHasLink);
