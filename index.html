@@ -1206,9 +1206,10 @@
                     item.tag.toLowerCase().includes(query);
                 return matchCat && matchSearch;
             }).sort((a, b) => {
-                // KlipForge AI menjadi kartu pertama, lalu kartu dengan tautan aktif.
-                if (a.title === "KlipForge AI") return -1;
-                if (b.title === "KlipForge AI") return 1;
+                // Prioritas utama: KlipForge AI selalu berada di posisi pertama.
+                const klipForgePriority = Number(b.title === 'KlipForge AI') - Number(a.title === 'KlipForge AI');
+                if (klipForgePriority !== 0) return klipForgePriority;
+                // Setelah itu, kartu dengan tautan aktif tampil lebih dahulu.
                 const aHasLink = !a.comingSoon && typeof a.link === 'string' && a.link.startsWith('http');
                 const bHasLink = !b.comingSoon && typeof b.link === 'string' && b.link.startsWith('http');
                 return Number(bHasLink) - Number(aHasLink);
