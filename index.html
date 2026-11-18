@@ -293,6 +293,21 @@
             border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
         }
+
+        /* Konfirmasi dan animasi logout */
+        @keyframes logoutBackdropIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes logoutModalIn { from { opacity:0; transform:translateY(18px) scale(.96); filter:blur(6px); } to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); } }
+        @keyframes logoutModalOut { to { opacity:0; transform:translateY(10px) scale(.97); filter:blur(4px); } }
+        @keyframes logoutSpin { to { transform:rotate(360deg); } }
+        @keyframes logoutPulse { 0%,100% { box-shadow:0 0 0 0 rgba(2,149,229,.2); } 50% { box-shadow:0 0 0 13px rgba(2,149,229,0); } }
+        #logoutConfirm:not(.hidden), #logoutProgress:not(.hidden) { animation:logoutBackdropIn .2s ease-out both; }
+        #logoutConfirm:not(.hidden) .logout-modal { animation:logoutModalIn .32s cubic-bezier(.2,.8,.2,1) both; }
+        #logoutConfirm.is-closing .logout-modal { animation:logoutModalOut .18s ease-in both; }
+        .logout-spinner { width:54px;height:54px;border:3px solid rgba(255,255,255,.14);border-top-color:#38bdf8;border-right-color:#84d12c;border-radius:50%;animation:logoutSpin .85s linear infinite; }
+        .logout-pulse { animation:logoutPulse 1.8s ease-in-out infinite; }
+        @media(prefers-reduced-motion:reduce) {
+            #logoutConfirm:not(.hidden),#logoutProgress:not(.hidden),#logoutConfirm:not(.hidden) .logout-modal,#logoutConfirm.is-closing .logout-modal,.logout-spinner,.logout-pulse { animation:none!important; }
+        }
     </style>
 
     <!-- Supabase Auth: wajib login dan profil harus aktif -->
@@ -379,18 +394,103 @@
 
             window.portalAuthReady = validatePortalAccess();
 
-            window.logoutPortal = async function () {
-                try {
-                    if (supabaseClient) await supabaseClient.auth.signOut();
-                } finally {
-                    redirectToLogin('');
+            window.performPortalLogout = async function () {
+                const overlay = document.getElementById('logoutProgress');
+                const confirmModal = document.getElementById('logoutConfirm');
+                const confirmButton = document.getElementById('logoutConfirmYes');
+                if (confirmButton) confirmButton.disabled = true;
+                if (confirmModal) {
+                    confirmModal.classList.add('is-closing');
+                    await new Promise(resolve => window.setTimeout(resolve, 180));
+                    confirmModal.classList.add('hidden');
+                    confirmModal.classList.remove('flex', 'is-closing');
                 }
+                if (overlay) {
+                    overlay.classList.remove('hidden');
+                    overlay.classList.add('flex');
+                }
+                document.documentElement.classList.add('logout-in-progress');
+                try {
+                    if (supabaseClient) {
+                        const { error } = await supabaseClient.auth.signOut();
+                        if (error) throw error;
+                    }
+                    await new Promise(resolve => window.setTimeout(resolve, 950));
+                    redirectToLogin('');
+                } catch (error) {
+                    console.error('Logout gagal:', error);
+                    document.documentElement.classList.remove('logout-in-progress');
+                    if (overlay) {
+                        overlay.classList.add('hidden');
+                        overlay.classList.remove('flex');
+                    }
+                    if (confirmButton) confirmButton.disabled = false;
+                    const errorText = document.getElementById('logoutError');
+                    if (errorText) {
+                        errorText.textContent = 'Logout gagal. Periksa koneksi internet lalu coba lagi.';
+                        errorText.classList.remove('hidden');
+                    }
+                    if (confirmModal) {
+                        confirmModal.classList.remove('hidden');
+                        confirmModal.classList.add('flex');
+                    }
+                }
+            };
+
+            window.logoutPortal = function () {
+                const modal = document.getElementById('logoutConfirm');
+                const errorText = document.getElementById('logoutError');
+                if (errorText) errorText.classList.add('hidden');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                    document.getElementById('logoutConfirmNo')?.focus();
+                }
+            };
+
+            window.closeLogoutConfirm = function () {
+                const modal = document.getElementById('logoutConfirm');
+                if (!modal || document.documentElement.classList.contains('logout-in-progress')) return;
+                modal.classList.add('is-closing');
+                window.setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex', 'is-closing');
+                }, 180);
             };
         })();
     </script>
 
 </head>
 <body class="text-slate-100 antialiased selection:bg-brand-blue/30 selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Modal konfirmasi logout -->
+    <div id="logoutConfirm" class="fixed inset-0 z-[120] hidden items-center justify-center bg-[#020617]/85 backdrop-blur-xl p-4" role="dialog" aria-modal="true" aria-labelledby="logoutConfirmTitle">
+        <div class="logout-modal ios-glass-modal w-full max-w-md rounded-3xl p-6 sm:p-7 text-center">
+            <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl border border-red-400/25 bg-red-500/10 text-red-300">
+                <i data-lucide="log-out" class="h-8 w-8"></i>
+            </div>
+            <div class="font-pixel text-[10px] tracking-[.2em] text-red-300">KONFIRMASI KELUAR</div>
+            <h2 id="logoutConfirmTitle" class="mt-2 font-display text-xl sm:text-2xl text-white">YAKIN INGIN KELUAR?</h2>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">Apakah kamu yakin ingin mengakhiri sesi dan keluar dari portal S-TeamCreative?</p>
+            <p id="logoutError" class="hidden mt-4 rounded-xl border border-red-400/20 bg-red-500/10 p-3 text-xs text-red-200"></p>
+            <div class="mt-7 grid grid-cols-2 gap-3">
+                <button id="logoutConfirmNo" type="button" onclick="closeLogoutConfirm()" class="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-slate-200 transition hover:bg-white/10">Tidak</button>
+                <button id="logoutConfirmYes" type="button" onclick="performPortalLogout()" class="rounded-xl bg-gradient-to-r from-red-600 to-rose-500 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-red-900/30 transition hover:brightness-110">Ya, Keluar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Layar proses logout -->
+    <div id="logoutProgress" class="fixed inset-0 z-[130] hidden items-center justify-center bg-[#020617]/95 backdrop-blur-2xl p-4" role="status" aria-live="polite">
+        <div class="w-full max-w-sm rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-center shadow-2xl">
+            <div class="logout-pulse mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full border border-sky-400/20 bg-sky-400/5">
+                <div class="logout-spinner"></div>
+            </div>
+            <div class="font-pixel text-[10px] tracking-[.22em] text-brand-blue">SESSION SECURITY</div>
+            <h2 class="mt-3 font-display text-2xl text-white">SEDANG KELUAR...</h2>
+            <p class="mt-3 text-sm text-slate-400">Mengakhiri sesi dengan aman. Mohon tunggu sebentar.</p>
+        </div>
+    </div>
 
     <!-- Pemberitahuan Hak Cipta: wajib disetujui setelah login -->
     <div id="copyrightNotice" class="fixed inset-0 z-[100] hidden items-center justify-center bg-[#020617]/90 backdrop-blur-xl p-4" role="dialog" aria-modal="true" aria-labelledby="copyrightNoticeTitle">
