@@ -469,11 +469,8 @@
                     <button onclick="filterCategory('Application')" class="flex items-center gap-2 hover:text-brand-blue transition-colors">
                         <span class="w-2 h-2 bg-brand-blue inline-block"></span>Application
                     </button>
-                    <button onclick="filterCategory('Materi')" class="flex items-center gap-2 hover:text-brand-green transition-colors">
-                        <span class="w-2 h-2 bg-brand-green inline-block"></span>Materi
-                    </button>
-                    <button onclick="filterCategory('Bahan Siap Upload')" class="flex items-center gap-2 hover:text-brand-amber transition-colors">
-                        <span class="w-2 h-2 bg-brand-amber inline-block"></span>Bahan Siap Upload
+                    <button onclick="filterCategory('Materi & Bahan Siap Upload')" class="flex items-center gap-2 hover:text-brand-green transition-colors">
+                        <span class="w-2 h-2 bg-brand-green inline-block"></span>Materi & Bahan Siap Upload
                     </button>
                 </nav>
                 <!-- Status pengguna yang sedang login + tombol keluar ringkas -->
@@ -546,13 +543,9 @@
                     <span class="w-2 h-2 bg-brand-blue shadow-[0_0_8px_#0295E5]"></span>
                     Application
                 </button>
-                <button onclick="filterCategory('Materi')" data-cat="Materi" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
+                <button onclick="filterCategory('Materi & Bahan Siap Upload')" data-cat="Materi & Bahan Siap Upload" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
                     <span class="w-2 h-2 bg-brand-green shadow-[0_0_8px_#84D12C]"></span>
-                    Materi
-                </button>
-                <button onclick="filterCategory('Bahan Siap Upload')" data-cat="Bahan Siap Upload" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
-                    <span class="w-2 h-2 bg-brand-amber shadow-[0_0_8px_#FDB813]"></span>
-                    Bahan Siap Upload
+                    Materi & Bahan Siap Upload
                 </button>
             </div>
 
@@ -1201,7 +1194,10 @@
                 : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch';
 
             const filtered = products.filter(item => {
-                const matchCat = currentCategory === 'all' || item.category === currentCategory;
+                const isCombinedMaterialCategory = currentCategory === 'Materi & Bahan Siap Upload';
+                const matchCat = currentCategory === 'all' ||
+                    (isCombinedMaterialCategory && ['Materi', 'Bahan Siap Upload'].includes(item.category)) ||
+                    item.category === currentCategory;
                 const query = currentSearch.toLowerCase().trim();
                 const matchSearch = !query || 
                     item.title.toLowerCase().includes(query) || 
@@ -1339,14 +1335,18 @@
             if (currentCategory === 'all') {
                 const renderedCards = Array.from(grid.children);
                 grid.innerHTML = '';
-                ['Application', 'Materi', 'Bahan Siap Upload'].forEach(category => {
-                    const categoryCards = filtered.map((item, index) => ({ item, card: renderedCards[index] })).filter(entry => entry.item.category === category);
+                [
+                    { title: 'Application', categories: ['Application'] },
+                    { title: 'Materi & Bahan Siap Upload', categories: ['Materi', 'Bahan Siap Upload'] }
+                ].forEach(group => {
+                    const categoryCards = filtered.map((item, index) => ({ item, card: renderedCards[index] }))
+                        .filter(entry => group.categories.includes(entry.item.category));
                     if (!categoryCards.length) return;
                     const section = document.createElement('section');
                     section.className = 'category-feature-section';
                     const heading = document.createElement('h2');
                     heading.className = 'category-feature-heading';
-                    heading.textContent = category;
+                    heading.textContent = group.title;
                     const row = document.createElement('div');
                     row.className = 'category-card-row';
                     categoryCards.forEach(entry => row.appendChild(entry.card));
