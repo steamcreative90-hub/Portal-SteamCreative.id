@@ -399,10 +399,10 @@
                 <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-amber-400/30 bg-amber-400/10 text-amber-300"><i data-lucide="shield-alert" class="h-6 w-6"></i></div>
                 <div><div class="font-pixel text-[10px] tracking-[.2em] text-brand-amber">PENTING • PERLINDUNGAN KARYA</div><h2 id="copyrightNoticeTitle" class="mt-1 font-display text-xl sm:text-2xl text-white">PEMBERITAHUAN HAK CIPTA</h2></div>
             </div>
-            <p class="mb-4 text-sm leading-relaxed text-slate-200">Selamat datang di <strong>S-TeamCreative.id</strong>. Seluruh aplikasi, materi, modul, template, file digital, dan bahan siap upload yang tersedia di portal ini diberikan untuk digunakan sesuai tujuan dan izin akses yang diberikan.</p>
+            <p class="mb-4 text-sm leading-relaxed text-slate-200">Selamat datang di <strong>S-TeamCreative.id</strong>. Seluruh aplikasi, materi, modul, template, file digital, dan koleksi yang tersedia di portal ini diberikan untuk digunakan sesuai tujuan dan izin akses yang diberikan.</p>
             <div class="mb-5 space-y-3 rounded-2xl border border-red-400/20 bg-red-500/5 p-4 text-sm leading-relaxed text-slate-200">
                 <p class="font-semibold text-red-300">DILARANG TANPA IZIN TERTULIS DARI PEMEGANG HAK:</p>
-                <ul class="list-disc space-y-2 pl-5"><li>Memperjualbelikan atau menjual ulang aplikasi, materi, dan bahan siap upload, baik secara utuh maupun sebagian.</li><li>Menyewakan, membagikan akun atau tautan akses, maupun mendistribusikan ulang kepada pihak lain.</li><li>Menggandakan, mengunggah ulang, membajak, mengubah untuk dijual kembali, atau mengklaim karya sebagai milik sendiri.</li></ul>
+                <ul class="list-disc space-y-2 pl-5"><li>Memperjualbelikan atau menjual ulang aplikasi, materi, dan koleksi, baik secara utuh maupun sebagian.</li><li>Menyewakan, membagikan akun atau tautan akses, maupun mendistribusikan ulang kepada pihak lain.</li><li>Menggandakan, mengunggah ulang, membajak, mengubah untuk dijual kembali, atau mengklaim karya sebagai milik sendiri.</li></ul>
             </div>
             <div class="mb-5 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-relaxed text-slate-300">
                 <p class="mb-2 font-semibold text-white">Dasar hukum: Undang-Undang Republik Indonesia Nomor 28 Tahun 2014 tentang Hak Cipta.</p>
@@ -469,8 +469,11 @@
                     <button onclick="filterCategory('Application')" class="flex items-center gap-2 hover:text-brand-blue transition-colors">
                         <span class="w-2 h-2 bg-brand-blue inline-block"></span>Application
                     </button>
-                    <button onclick="filterCategory('Materi & Bahan Siap Upload')" class="flex items-center gap-2 hover:text-brand-green transition-colors">
-                        <span class="w-2 h-2 bg-brand-green inline-block"></span>Materi & Bahan Siap Upload
+                    <button onclick="filterCategory('Materi')" class="flex items-center gap-2 hover:text-brand-green transition-colors">
+                        <span class="w-2 h-2 bg-brand-green inline-block"></span>Materi
+                    </button>
+                    <button onclick="filterCategory('Koleksi')" class="flex items-center gap-2 hover:text-brand-amber transition-colors">
+                        <span class="w-2 h-2 bg-brand-amber inline-block"></span>Koleksi
                     </button>
                 </nav>
                 <!-- Status pengguna yang sedang login + tombol keluar ringkas -->
@@ -507,7 +510,7 @@
             </h1>
 
             <p class="text-slate-300/90 text-sm sm:text-base max-w-2xl mx-auto mb-8 leading-relaxed">
-                Temukan berbagai aplikasi produktivitas siap pakai, modul materi pembelajaran terstruktur, hingga ribuan bahan siap upload dalam satu ekosistem modern.
+                Temukan berbagai aplikasi produktivitas siap pakai, modul pembelajaran terstruktur, serta berbagai koleksi aset digital dalam satu ekosistem modern.
             </p>
 
             <!-- Search Bar (iOS 27 Glass Style) -->
@@ -518,7 +521,7 @@
                         type="text" 
                         id="searchInput" 
                         onkeyup="handleSearch()" 
-                        placeholder="Cari aplikasi, e-book materi, template, atau bahan siap upload..." 
+                        placeholder="Cari aplikasi, materi, e-book, template, atau koleksi..." 
                         class="w-full pl-12 pr-12 py-4 ios-glass rounded-2xl text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-blue/60 focus:border-white/30 transition-all"
                     >
                     <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-4 text-slate-400 hover:text-white p-1">
@@ -543,9 +546,13 @@
                     <span class="w-2 h-2 bg-brand-blue shadow-[0_0_8px_#0295E5]"></span>
                     Application
                 </button>
-                <button onclick="filterCategory('Materi & Bahan Siap Upload')" data-cat="Materi & Bahan Siap Upload" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
+                <button onclick="filterCategory('Materi')" data-cat="Materi" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
                     <span class="w-2 h-2 bg-brand-green shadow-[0_0_8px_#84D12C]"></span>
-                    Materi & Bahan Siap Upload
+                    Materi
+                </button>
+                <button onclick="filterCategory('Koleksi')" data-cat="Koleksi" class="tab-btn px-5 py-2.5 rounded-2xl font-display text-xs uppercase tracking-wider transition-all duration-200 ios-glass text-slate-200 hover:text-white whitespace-nowrap flex items-center gap-2">
+                    <span class="w-2 h-2 bg-brand-amber shadow-[0_0_8px_#FDB813]"></span>
+                    Koleksi
                 </button>
             </div>
 
@@ -864,7 +871,7 @@
             {
                 id: 15,
                 title: "8000 ++ Preset Adobe Lightroom",
-                category: "Bahan Siap Upload",
+                category: "Koleksi",
                 tag: "8.000+ Lightroom Presets • Photo Editing",
                 price: "Akses Koleksi",
                 icon: "sliders-horizontal",
@@ -881,9 +888,27 @@
                 link: "https://drive.google.com/drive/folders/1jCIsaJXl4Kezh0GLqhGmqDb-RguphADA"
             },
             {
+                id: 16,
+                title: "6000++ Faceless Aesthetic Videos",
+                category: "Koleksi",
+                tag: "6.000+ Faceless Videos • Aesthetic Content",
+                price: "Akses Koleksi",
+                icon: "video",
+                shortDesc: "Koleksi 6.000+ video faceless bernuansa aesthetic untuk membantu kreator menyiapkan konten visual tanpa perlu menampilkan wajah.",
+                fullDesc: "6000++ Faceless Aesthetic Videos merupakan koleksi video visual bertema aesthetic yang dapat dijadikan bahan referensi dan aset pendukung produksi konten. Cocok untuk kreator media sosial, pengelola akun faceless, dan kebutuhan storytelling visual. Pilih video yang sesuai dengan konsep konten, lalu sesuaikan dengan identitas serta kebutuhan platform yang digunakan. Periksa ketentuan penggunaan dan detail file pada folder Google Drive sebelum dipublikasikan.",
+                features: [
+                    "Koleksi berisi 6.000+ video faceless aesthetic",
+                    "Mendukung pembuatan konten tanpa menampilkan wajah",
+                    "Dapat digunakan sebagai referensi dan aset visual konten",
+                    "Cocok untuk eksplorasi ide konten media sosial",
+                    "Akses koleksi melalui folder Google Drive"
+                ],
+                link: "https://drive.google.com/drive/folders/1n_OUp50WIH5gkD4WoJjEYmSLTgA3WKrT"
+            },
+            {
                 id: 10,
                 title: "Konten Islami – Digital Content Collection",
-                category: "Bahan Siap Upload",
+                category: "Koleksi",
                 tag: "Islamic Digital Assets • Ready to Upload",
                 price: "Akses Koleksi",
                 icon: "book-open",
@@ -901,7 +926,7 @@
             {
                 id: 7,
                 title: "1.500+ Template Konten Sosial Media",
-                category: "Bahan Siap Upload",
+                category: "Koleksi",
                 tag: "Canva & PSD",
                 price: "Rp 129.000",
                 icon: "image",
@@ -919,7 +944,7 @@
             {
                 id: 8,
                 title: "Mega Pack Aset Vektor & Ilustrasi",
-                category: "Bahan Siap Upload",
+                category: "Koleksi",
                 tag: "SVG • AI • PNG",
                 price: "Rp 145.000",
                 icon: "shapes",
@@ -937,7 +962,7 @@
             {
                 id: 14,
                 title: "10.000 + Template Canva Siap Pakai",
-                category: "Bahan Siap Upload",
+                category: "Koleksi",
                 tag: "10.000+ Canva Templates • Editable",
                 price: "Akses Koleksi",
                 icon: "palette",
@@ -956,7 +981,7 @@
             {
                 id: 9,
                 title: "Kit Presentasi Pitch Deck & Bisnis",
-                category: "Bahan Siap Upload",
+                category: "Koleksi",
                 tag: "PPTX & Google Slides",
                 price: "Rp 115.000",
                 icon: "presentation",
@@ -991,7 +1016,7 @@
                 dotColor: 'bg-brand-green shadow-[0_0_8px_#84D12C]',
                 btnHover: 'group-hover:bg-brand-green group-hover:text-slate-950 group-hover:border-brand-green'
             },
-            'Bahan Siap Upload': {
+            'Koleksi': {
                 badgeBg: 'bg-brand-amber/15 text-amber-300 border-brand-amber/30',
                 iconBg: 'bg-brand-amber/15 text-amber-400 border border-brand-amber/30',
                 dotColor: 'bg-brand-amber shadow-[0_0_8px_#FDB813]',
@@ -1232,10 +1257,7 @@
                 : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch';
 
             const filtered = products.filter(item => {
-                const isCombinedMaterialCategory = currentCategory === 'Materi & Bahan Siap Upload';
-                const matchCat = currentCategory === 'all' ||
-                    (isCombinedMaterialCategory && ['Materi', 'Bahan Siap Upload'].includes(item.category)) ||
-                    item.category === currentCategory;
+                const matchCat = currentCategory === 'all' || item.category === currentCategory;
                 const query = currentSearch.toLowerCase().trim();
                 const matchSearch = !query || 
                     item.title.toLowerCase().includes(query) || 
@@ -1315,7 +1337,7 @@
                             Detail
                         </button>
                         <a href="${item.link}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="inline-flex shrink-0 whitespace-nowrap items-center gap-1 px-3 py-2 rounded-xl font-display text-[10px] uppercase tracking-wider text-white bg-brand-blue hover:bg-sky-400 shadow-[0_0_15px_rgba(2,149,229,0.4)] transition-all">
-                            <span>${item.category === 'Materi' ? 'Akses Materi' : item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka App'}</span>
+                            <span>${item.category === 'Materi' ? 'Akses Materi' : item.category === 'Koleksi' ? 'Akses' : 'Buka App'}</span>
                             <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                         </a>
                     </div>
@@ -1375,7 +1397,8 @@
                 grid.innerHTML = '';
                 [
                     { title: 'Application', categories: ['Application'] },
-                    { title: 'Materi & Bahan Siap Upload', categories: ['Materi', 'Bahan Siap Upload'] }
+                    { title: 'Materi', categories: ['Materi'] },
+                    { title: 'Koleksi', categories: ['Koleksi'] }
                 ].forEach(group => {
                     const categoryCards = filtered.map((item, index) => ({ item, card: renderedCards[index] }))
                         .filter(entry => group.categories.includes(entry.item.category));
@@ -1485,7 +1508,7 @@
                 actionBtn.target = '_blank';
                 actionBtn.rel = 'noopener noreferrer';
                 actionBtn.onclick = null;
-                actionBtn.innerHTML = `<span>${item.category === 'Materi' ? 'Akses Materi' : item.category === 'Bahan Siap Upload' ? 'Akses' : 'Buka App'}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
+                actionBtn.innerHTML = `<span>${item.category === 'Materi' ? 'Akses Materi' : item.category === 'Koleksi' ? 'Akses' : 'Buka App'}</span><i data-lucide="external-link" class="w-4 h-4"></i>`;
             } else {
                 actionBtn.href = '#';
                 actionBtn.removeAttribute('target');
