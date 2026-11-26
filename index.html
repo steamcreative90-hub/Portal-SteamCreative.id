@@ -50,23 +50,29 @@
             text-align: justify;
             text-justify: inter-word;
         }
-        /* Kunci ukuran kartu agar seluruh kartu sejajar, termasuk dalam baris horizontal */
+        /* Kartu aplikasi: tinggi fleksibel agar deskripsi tidak terpotong */
+        #productGrid .category-card-row,
+        #productGrid:not(.all-features-row) {
+            align-items: stretch !important;
+        }
         #productGrid .category-card-row > article,
         #productGrid:not(.all-features-row) > article {
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
+            align-self: stretch !important;
             box-sizing: border-box !important;
-            height: 460px !important;
+            height: auto !important;
             min-height: 460px !important;
-            max-height: 460px !important;
+            max-height: none !important;
             flex: 0 0 min(86vw, 360px) !important;
-            overflow: hidden !important;
+            overflow: visible !important;
         }
         #productGrid .category-card-row > article > div:first-child,
         #productGrid:not(.all-features-row) > article > div:first-child {
+            flex: 1 1 auto !important;
             min-height: 0 !important;
-            overflow: hidden !important;
+            overflow: visible !important;
         }
         /* Standar universal thumbnail seluruh aplikasi: 16:9, ukuran mengikuti lebar kartu */
         #productGrid .app-preview-frame {
@@ -109,9 +115,9 @@
         @media (max-width: 640px) {
             #productGrid .category-card-row > article,
             #productGrid:not(.all-features-row) > article {
-                height: 460px !important;
-                min-height: 460px !important;
-                max-height: 460px !important;
+                height: auto !important;
+                min-height: 440px !important;
+                max-height: none !important;
             }
             /* Rasio thumbnail 16:9 tetap konsisten di layar kecil. */
         }
@@ -126,14 +132,14 @@
         .category-card-row::-webkit-scrollbar-track { background:rgba(255,255,255,.04); border-radius:999px; }
         /* Baris kartu: tinggi dan posisi bawah wajib identik, termasuk Affiliate Generator */
         #productGrid .category-card-row {
-            align-items: flex-start !important;
+            align-items: stretch !important;
         }
         #productGrid .category-card-row > article {
-            align-self: flex-start !important;
+            align-self: stretch !important;
             flex-shrink: 0 !important;
-            height: 460px !important;
+            height: auto !important;
             min-height: 460px !important;
-            max-height: 460px !important;
+            max-height: none !important;
             box-sizing: border-box !important;
         }
         #productGrid .category-card-row > article > div:last-child {
