@@ -68,11 +68,30 @@
             min-height: 0 !important;
             overflow: hidden !important;
         }
+        /* Semua preview aplikasi memakai rasio seragam 16:9 */
         #productGrid .category-card-row > article .app-preview-frame,
         #productGrid:not(.all-features-row) > article .app-preview-frame {
-            height: 130px !important;
-            min-height: 130px !important;
-            max-height: 130px !important;
+            height: 176px !important;
+            min-height: 176px !important;
+            max-height: 176px !important;
+            aspect-ratio: 16 / 9 !important;
+            padding: 0 !important;
+        }
+        #productGrid .app-preview-frame > *,
+        #productGrid .app-preview-frame img {
+            width: 100% !important;
+            height: 100% !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            object-fit: cover !important;
+            object-position: center !important;
+        }
+        #productGrid .app-preview-frame [class*="min-h-"] {
+            min-height: 0 !important;
+        }
+        #productGrid .app-preview-frame .relative {
+            margin-bottom: 0 !important;
+            border-radius: 0 !important;
         }
         #productGrid .category-card-row > article h3,
         #productGrid:not(.all-features-row) > article h3 {
@@ -84,9 +103,16 @@
         @media (max-width: 640px) {
             #productGrid .category-card-row > article,
             #productGrid:not(.all-features-row) > article {
-                height: 440px !important;
-                min-height: 440px !important;
-                max-height: 440px !important;
+                height: 460px !important;
+                min-height: 460px !important;
+                max-height: 460px !important;
+            }
+            #productGrid .category-card-row > article .app-preview-frame,
+            #productGrid:not(.all-features-row) > article .app-preview-frame {
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                aspect-ratio: 16 / 9 !important;
             }
         }
         /* Scroll horizontal khusus tab Semua Fitur */
@@ -1120,8 +1146,8 @@
         function getAppPreviewHtml(previewType, isModal = false) {
             if (previewType === 'steamvisual') {
                 return `
-                    <div class="relative ${isModal ? 'w-full' : 'mb-5 h-full min-h-[130px]'} overflow-hidden rounded-xl border border-white/15 bg-[#050817]">
-                        <img src="assets/s-team-visual-pro-preview.webp" alt="S Team Visual Pro — Canvas dan Chrome Side Panel" class="${isModal ? 'block h-auto max-h-[68vh] w-full object-contain' : 'h-full w-full object-cover object-center'}" loading="lazy" decoding="async">
+                    <div class="relative h-full w-full overflow-hidden bg-[#050817]">
+                        <img src="assets/s-team-visual-pro-preview.webp" alt="S Team Visual Pro — Canvas dan Chrome Side Panel" class="block h-full w-full object-cover object-center" loading="lazy" decoding="async">
                     </div>
                 `;
             }
@@ -1581,11 +1607,7 @@
             document.getElementById('modalDesc').textContent = item.fullDesc;
             const modalPreview = document.getElementById('modalPreview');
             if (item.previewType) {
-                if (item.previewType === 'steamvisual') {
-                    modalPreview.className = 'max-h-[72vh] rounded-2xl border border-white/10 bg-black/20 p-3 overflow-y-auto';
-                } else {
-                    modalPreview.className = 'hidden h-56 sm:h-64 rounded-2xl border border-white/10 bg-black/20 p-3 overflow-y-auto';
-                }
+                modalPreview.className = 'h-auto max-h-[58vh] aspect-video rounded-2xl border border-white/10 bg-black/20 p-0 overflow-hidden';
                 modalPreview.innerHTML = getAppPreviewHtml(item.previewType, true);
                 modalPreview.classList.remove('hidden');
             } else {
