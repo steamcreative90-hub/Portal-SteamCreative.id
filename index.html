@@ -1120,52 +1120,8 @@
         function getAppPreviewHtml(previewType) {
             if (previewType === 'steamvisual') {
                 return `
-                    <div class="relative mb-5 h-full min-h-[130px] overflow-hidden rounded-xl border border-white/15 bg-[#080b12] p-1.5">
-                        <div class="absolute inset-0 bg-[#070b16]"></div>
-                        <div class="relative z-10 flex h-full min-h-[116px] gap-1.5">
-                            <div class="relative flex min-w-0 flex-[3.15] flex-col overflow-hidden rounded-md border border-white/10 bg-[#03091b]">
-                                <div class="flex h-5 shrink-0 items-center gap-1 border-b border-white/10 bg-[#111827] px-1.5">
-                                    <span class="text-[7px] font-semibold tracking-wide text-slate-300">S-TEAMCREATIVE.ID</span>
-                                </div>
-                                <div class="relative m-1 flex flex-1 flex-col overflow-hidden rounded-md border border-white/10 bg-[#050b20]">
-                                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_52%_53%,rgba(32,130,200,.35),transparent_42%),linear-gradient(155deg,#101b3b_0%,#03091c_60%,#06142d_100%)]"></div>
-                                    <div class="absolute -left-8 top-5 h-10 w-[115%] rotate-[-8deg] rounded-[50%] border-b border-sky-300/20 bg-gradient-to-r from-sky-300/10 via-indigo-400/15 to-transparent blur-[1px]"></div>
-                                    <div class="absolute -right-8 bottom-3 h-9 w-[90%] rotate-[-12deg] rounded-[50%] border-t border-cyan-300/25 bg-gradient-to-r from-transparent via-cyan-400/20 to-blue-500/20 blur-[1px]"></div>
-                                    <div class="relative z-10 mx-1.5 mt-1.5 flex h-5 shrink-0 items-center justify-between rounded-md border border-white/15 bg-[#0d1730]/90 px-1.5">
-                                        <span class="font-display text-[6px] tracking-wider text-white">S TEAM VISUAL PRO</span>
-                                        <span class="rounded bg-emerald-400/15 px-1 py-0.5 text-[5px] text-emerald-300">● Canvas OK</span>
-                                    </div>
-                                    <div class="relative z-10 flex flex-1 flex-col items-center justify-center px-1 text-center">
-                                        <div class="font-display text-[6px] tracking-[.2em] text-white">S TEAM VISUAL PRO</div>
-                                        <div class="mt-1 font-display text-[clamp(8px,1.2vw,15px)] leading-tight text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-sky-300 to-cyan-100">UNLIMITED VIDEO GENERATOR</div>
-                                        <div class="mt-1 text-[5px] text-slate-400">AI Production Canvas & HD Video Renderer</div>
-                                    </div>
-                                    <div class="relative z-10 mx-auto mb-1 h-1 w-1/3 rounded-full bg-sky-300/50 blur-sm"></div>
-                                </div>
-                            </div>
-                            <div class="flex min-w-0 flex-1 flex-col overflow-hidden rounded-md border border-white/15 bg-[#090e18]">
-                                <div class="flex h-5 shrink-0 items-center justify-between border-b border-white/10 px-1">
-                                    <span class="truncate text-[5px] font-semibold text-slate-200">▶ S Team Visual Pro</span><span class="text-[6px] text-slate-400">×</span>
-                                </div>
-                                <div class="flex items-center justify-between border-b border-white/10 px-1 py-1">
-                                    <span class="text-[5px] font-bold text-white">S TEAM VISUAL</span><span class="rounded bg-emerald-500/20 px-1 text-[5px] text-emerald-300">Canvas OK</span>
-                                </div>
-                                <div class="mx-1 mt-1 flex gap-1 rounded-md border border-white/10 bg-cyan-300/10 p-1">
-                                    <span class="rounded bg-sky-500 px-1 py-0.5 text-[5px] text-white">✦ Ide</span><span class="text-[5px] text-slate-400">Karakter</span><span class="text-[5px] text-slate-400">Narasi</span>
-                                </div>
-                                <div class="mx-1 mt-1 flex-1 rounded-md border border-white/15 bg-white/[.05] p-1">
-                                    <div class="text-[5px] font-semibold text-white">✦ Mau bikin video apa hari ini?</div>
-                                    <div class="mt-1 rounded border border-white/10 bg-white/[.06] px-1 py-1 text-[5px] text-slate-500">Tulis judul atau ide video...</div>
-                                    <div class="mt-1 grid grid-cols-2 gap-1"><span class="rounded bg-white/10 px-1 py-1 text-[5px] text-slate-300">Bahasa Indonesia</span><span class="rounded bg-white/10 px-1 py-1 text-[5px] text-slate-300">16:9 YouTube</span></div>
-                                    <div class="mt-1 rounded bg-white/10 px-1 py-1 text-center text-[5px] text-slate-300">Pilih tema video...</div>
-                                    <div class="mt-1 grid grid-cols-2 gap-1"><span class="rounded bg-white/10 py-1 text-center text-[5px] text-amber-300">⚡ IDE CEPAT</span><span class="rounded bg-sky-500 py-1 text-center text-[5px] font-bold text-white">KEMBANGKAN JUDUL</span></div>
-                                </div>
-                                <div class="mx-1 mb-1 mt-1 rounded-md border border-white/15 bg-white/[.06] p-1">
-                                    <div class="text-[5px] font-semibold text-white">▤ Gaya Visual Utama (51)</div>
-                                    <div class="mt-1 grid grid-cols-3 gap-1"><span class="h-3 rounded bg-gradient-to-br from-pink-400 to-blue-700"></span><span class="h-3 rounded bg-gradient-to-br from-amber-300 to-emerald-700"></span><span class="h-3 rounded bg-gradient-to-br from-violet-500 to-cyan-600"></span></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="relative mb-5 h-full min-h-[130px] overflow-hidden rounded-xl border border-white/15 bg-[#050817]">
+                        <img src="assets/s-team-visual-pro-preview.webp" alt="S Team Visual Pro — Canvas dan Chrome Side Panel" class="h-full w-full object-cover object-center" loading="lazy">
                     </div>
                 `;
             }
