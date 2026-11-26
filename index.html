@@ -1117,11 +1117,11 @@
         }
 
         // Helper Render Mini UI Preview Aplikasi
-        function getAppPreviewHtml(previewType) {
+        function getAppPreviewHtml(previewType, isModal = false) {
             if (previewType === 'steamvisual') {
                 return `
-                    <div class="relative mb-5 h-full min-h-[130px] overflow-hidden rounded-xl border border-white/15 bg-[#050817]">
-                        <img src="assets/s-team-visual-pro-preview.webp" alt="S Team Visual Pro — Canvas dan Chrome Side Panel" class="h-full w-full object-cover object-center" loading="lazy">
+                    <div class="relative ${isModal ? 'w-full' : 'mb-5 h-full min-h-[130px]'} overflow-hidden rounded-xl border border-white/15 bg-[#050817]">
+                        <img src="assets/s-team-visual-pro-preview.webp" alt="S Team Visual Pro — Canvas dan Chrome Side Panel" class="${isModal ? 'block h-auto max-h-[68vh] w-full object-contain' : 'h-full w-full object-cover object-center'}" loading="lazy" decoding="async">
                     </div>
                 `;
             }
@@ -1581,7 +1581,12 @@
             document.getElementById('modalDesc').textContent = item.fullDesc;
             const modalPreview = document.getElementById('modalPreview');
             if (item.previewType) {
-                modalPreview.innerHTML = getAppPreviewHtml(item.previewType);
+                if (item.previewType === 'steamvisual') {
+                    modalPreview.className = 'max-h-[72vh] rounded-2xl border border-white/10 bg-black/20 p-3 overflow-y-auto';
+                } else {
+                    modalPreview.className = 'hidden h-56 sm:h-64 rounded-2xl border border-white/10 bg-black/20 p-3 overflow-y-auto';
+                }
+                modalPreview.innerHTML = getAppPreviewHtml(item.previewType, true);
                 modalPreview.classList.remove('hidden');
             } else {
                 modalPreview.innerHTML = '';
