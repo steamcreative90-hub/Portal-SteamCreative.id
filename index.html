@@ -792,6 +792,31 @@
                 link: "https://share.gemini.google/Gh7nfqhA2Edk"
             },
 
+            {
+                id: 14,
+                title: "S Team Visual Pro",
+                subtitle: "by s-teamcreative.id",
+                category: "Application",
+                statusText: "UNLIMITED",
+                tag: "Unlimited Video Generator • HD AI Production Canvas",
+                price: "Download Aplikasi",
+                icon: "clapperboard",
+                previewType: "steamvisual",
+                shortDesc: "S Team Visual Pro adalah ekosistem produksi video berbasis AI yang menggabungkan AI Canvas Engine, Editor Preview Interaktif, dan HD Video Renderer langsung di browser. Ubah ide menjadi video MP4 siap unggah dengan alur kerja terintegrasi.",
+                fullDesc: "S Team Visual Pro — Unlimited Video Generator & HD AI Production Canvas. Dibuat oleh S-TeamCreative.id, aplikasi ini menggabungkan AI Canvas Engine, Editor Preview Interaktif, dan HD Video Renderer langsung di dalam browser. Dirancang untuk kreator konten, storyteller, dan tim kreatif, S Team Visual Pro membantu memangkas waktu produksi video tanpa memerlukan perangkat lunak editing berat. Dari brainstorming dan naskah otomatis, pengembangan karakter serta visual scene, sinkronisasi subtitle, hingga ekspor video MP4, seluruh proses tersedia dalam satu alur kerja.",
+                features: [
+                    "1. Produksi Video AI End-to-End: Brainstorming judul, pengembangan premis, naskah voice-over sesuai durasi dan gaya bahasa, serta perancangan profil karakter konsisten dengan potret referensi, voice style, prompt musik instrumental, dan visual HD di setiap scene.",
+                    "2. Adaptive Turbo Queue hingga 3x Paralel: Pilihan Turbo 3x, Cepat 2x, dan Aman 1x. Auto-Throttle dan Smart Retry menyesuaikan antrean saat layanan API padat. Galeri live menampilkan aset karakter, scene, dan overlay dalam format 16:9 dengan kontrol Regenerate, Unduh PNG, dan Salin ke Clipboard.",
+                    "3. Sinkronisasi Subtitle 4 Metode: AI Utterance Sync dengan Speech-Band Filter 260Hz–3400Hz; Tap-to-Sync Studio dengan pemutaran 0.75x/0.85x, kompensasi refleks jari, dan Undo; impor SRT/VTT dari Whisper, CapCut, atau ElevenLabs; serta Offset ±2000ms dan Drift Tempo ±10%. Tersedia 24 font premium, 15 animasi subtitle, pembersihan tanda baca otomatis, dan kustomisasi warna.",
+                    "4. Visual Sinematik Otomatis — Make Video Alive: Menghidupkan gambar statis dengan 16 transisi dan gerak kamera seperti Ken Burns, Glitch, Whip-Pan, Zoom, Iris Wipe, Spin Twist, dan Flash White. Smart Contextual Overlays menyesuaikan blend mode dan opasitas berdasarkan kecerahan gambar. Termasuk Film Color Mood, watermark teks/logo, Top Progress Bar, dan CTA Ending.",
+                    "5. Mixing Audio Pintar & SFX Prosedural: Sample-Accurate Audio Clock menjaga audio dan visual tetap sinkron. Real-Time Auto-Ducking menurunkan backsound saat narator berbicara, lalu menaikkannya kembali saat jeda dengan cosine fade-out. SFX whoosh, glitch, impact hit, zoom sweep, dan camera flash dibuat otomatis serta diseimbangkan terhadap suara narator.",
+                    "6. Silent Off-Screen HD Renderer: Ekspor MP4 hingga 4K (2160p) dan 60 FPS, dengan rasio 16:9, 9:16, dan 1:1 serta resolusi 720p, 1080p, 1440p, dan 4K. Rendering berjalan di off-screen canvas tanpa mengganggu speaker komputer dan dirancang tetap berjalan saat tab tidak aktif.",
+                    "7. Integrasi Chrome Extension & Browser Ringan: Komunikasi real-time dua arah antara Side Panel ekstensi Chrome dan Canvas AI Engine. Antarmuka Dark Glassmorphism berjalan langsung di browser tanpa software editing berat, dengan video latar otomatis berhenti saat ruang kerja aktif.",
+                    "Cocok untuk kreator YouTube, TikTok, dan Instagram Reels; agensi digital dan UMKM yang membutuhkan video promosi dengan watermark, CTA, serta subtitle; juga edukator dan podcaster yang ingin mengubah naskah atau rekaman suara menjadi video visual menarik."
+                ],
+                link: "https://drive.google.com/drive/folders/1HUNGsr9imNLfrbVnrJgutjFjnpSN2prn?usp=drive_link"
+            },
+
             // KATEGORI: MATERI
             {
                 id: 4,
@@ -1093,6 +1118,32 @@
 
         // Helper Render Mini UI Preview Aplikasi
         function getAppPreviewHtml(previewType) {
+            if (previewType === 'steamvisual') {
+                return `
+                    <div class="relative mb-5 h-full min-h-[130px] rounded-2xl border border-sky-300/20 bg-[#050817] p-2 shadow-inner overflow-hidden">
+                        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_48%_55%,rgba(20,125,220,.28),transparent_58%),linear-gradient(145deg,#101b3d,#030817_65%)]"></div>
+                        <div class="relative z-10 flex h-full gap-2">
+                            <div class="flex min-w-0 flex-[1.7] flex-col rounded-xl border border-white/10 bg-[#050a1c]/80 p-2">
+                                <div class="flex items-center justify-between border-b border-white/10 pb-1.5">
+                                    <span class="font-display text-[8px] tracking-wider text-white">S TEAM VISUAL PRO</span>
+                                    <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-1.5 py-0.5 text-[6px] text-emerald-300">CANVAS OK</span>
+                                </div>
+                                <div class="flex flex-1 flex-col items-center justify-center text-center">
+                                    <div class="font-display text-[7px] tracking-[.22em] text-sky-100">S TEAM VISUAL PRO</div>
+                                    <div class="mt-1 font-display text-[13px] leading-tight text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-sky-300 to-cyan-100">UNLIMITED VIDEO GENERATOR</div>
+                                    <div class="mt-1 text-[6px] text-slate-400">AI Production Canvas & HD Video Renderer</div>
+                                </div>
+                                <div class="flex items-center justify-between text-[6px] text-slate-400"><span>AI CANVAS ENGINE</span><span>HD RENDERER</span></div>
+                            </div>
+                            <div class="flex min-w-0 flex-1 flex-col gap-1 rounded-xl border border-white/10 bg-[#111827]/90 p-1.5">
+                                <div class="flex items-center gap-1 border-b border-white/10 pb-1"><span class="h-2 w-2 rounded-full bg-sky-400"></span><span class="font-display text-[7px] text-white">SIDE PANEL</span></div>
+                                <div class="rounded-lg border border-sky-300/20 bg-sky-400/10 p-1.5"><div class="text-[7px] font-bold text-sky-200">✦ Ide Video</div><div class="mt-1 h-3 rounded bg-white/10"></div><div class="mt-1 flex gap-1"><span class="rounded bg-white/10 px-1 text-[6px] text-slate-300">16:9</span><span class="rounded bg-sky-500 px-1 text-[6px] text-white">Generate</span></div></div>
+                                <div class="mt-auto rounded-lg border border-white/10 bg-white/[.04] p-1"><div class="text-[6px] font-bold text-white">GAYA VISUAL (51)</div><div class="mt-1 grid grid-cols-3 gap-1"><span class="h-4 rounded bg-gradient-to-br from-pink-500/70 to-blue-700/70"></span><span class="h-4 rounded bg-gradient-to-br from-amber-300/70 to-emerald-700/70"></span><span class="h-4 rounded bg-gradient-to-br from-violet-500/70 to-cyan-700/70"></span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
             if (previewType === 'klipforge') {
                 return `
                     <div class="mb-5 rounded-2xl bg-[#050A18]/95 border border-sky-400/20 p-3 shadow-inner overflow-hidden">
