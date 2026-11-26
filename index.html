@@ -68,23 +68,29 @@
             min-height: 0 !important;
             overflow: hidden !important;
         }
-        /* Semua preview aplikasi memakai rasio seragam 16:9 */
-        #productGrid .category-card-row > article .app-preview-frame,
-        #productGrid:not(.all-features-row) > article .app-preview-frame {
-            height: 176px !important;
-            min-height: 176px !important;
-            max-height: 176px !important;
+        /* Standar universal thumbnail seluruh aplikasi: 16:9, ukuran mengikuti lebar kartu */
+        #productGrid .app-preview-frame {
+            display: block !important;
+            position: relative !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
             aspect-ratio: 16 / 9 !important;
+            flex: 0 0 auto !important;
             padding: 0 !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
         }
         #productGrid .app-preview-frame > *,
         #productGrid .app-preview-frame img {
+            display: block !important;
             width: 100% !important;
             height: 100% !important;
             min-height: 0 !important;
             max-height: none !important;
             object-fit: cover !important;
-            object-position: center !important;
+            object-position: center center !important;
         }
         #productGrid .app-preview-frame [class*="min-h-"] {
             min-height: 0 !important;
@@ -107,13 +113,7 @@
                 min-height: 460px !important;
                 max-height: 460px !important;
             }
-            #productGrid .category-card-row > article .app-preview-frame,
-            #productGrid:not(.all-features-row) > article .app-preview-frame {
-                height: auto !important;
-                min-height: 0 !important;
-                max-height: none !important;
-                aspect-ratio: 16 / 9 !important;
-            }
+            /* Rasio thumbnail 16:9 tetap konsisten di layar kecil. */
         }
         /* Scroll horizontal khusus tab Semua Fitur */
         #productGrid.all-features-row { display:flex; flex-direction:column; gap:2rem; }
